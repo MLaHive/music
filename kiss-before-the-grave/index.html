@@ -110,6 +110,44 @@
     margin-top: 4rem;
   }
 
+  /* --- onboarding cues --- */
+  @keyframes cuePulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+  @keyframes ringPulse {
+    0% { box-shadow: 0 0 0 0 rgba(201, 74, 74, 0.6); }
+    70% { box-shadow: 0 0 0 14px rgba(201, 74, 74, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(201, 74, 74, 0); }
+  }
+
+  .hero .play-cue {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    color: var(--blood);
+    text-transform: uppercase;
+    margin-top: 3rem;
+    animation: cuePulse 2.4s ease-in-out infinite;
+    transition: opacity 1.2s ease-out;
+  }
+  .hero .play-cue svg {
+    width: 10px;
+    height: 10px;
+    fill: currentColor;
+  }
+  .hero .play-cue.dismissed {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+
+  .play-btn.pulse {
+    animation: ringPulse 2s ease-out infinite;
+  }
+
   .lyric {
     font-size: 1.25rem;
     line-height: 1.9;
@@ -357,6 +395,10 @@
   </svg>
   <h1>Kiss Before<br/>the Grave</h1>
   <p class="subtitle">She loved him too well to let him live.</p>
+  <p class="play-cue" id="playCue">
+    <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 1 L1 9 L9 5 Z"/></svg>
+    press play to begin
+  </p>
   <p class="scroll-cue">scroll slowly</p>
 </section>
 
@@ -663,12 +705,20 @@
     }
   });
 
-  audio.addEventListener('play', () => setPlayIcon(true));
+  audio.addEventListener('play', () => {
+    setPlayIcon(true);
+    // Dismiss onboarding cues once playback begins
+    const cue = document.getElementById('playCue');
+    if (cue) cue.classList.add('dismissed');
+    playBtn.classList.remove('pulse');
+  });
   audio.addEventListener('pause', () => setPlayIcon(false));
   audio.addEventListener('ended', () => setPlayIcon(false));
   audio.addEventListener('loadedmetadata', () => {
     timeDuration.textContent = formatTime(audio.duration);
     uploadLabel.style.display = 'none';
+    // Start pulsing the play button so it's clear what to click
+    playBtn.classList.add('pulse');
   });
   audio.addEventListener('timeupdate', () => {
     if (audio.duration) {
