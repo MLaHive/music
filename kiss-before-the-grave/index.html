@@ -19,6 +19,7 @@
     --ink-dim: #8a6a6a;
     --ink-whisper: #6b4a4a;
     --blood: #c94a4a;
+    --blood-bright: #e86060;
     --blood-dark: #6b2020;
     --blood-deep: #2a0a10;
     --bone: #d4d4e0;
@@ -26,7 +27,6 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -35,25 +35,19 @@
     font-family: var(--serif);
     line-height: 1.7;
     overflow-x: hidden;
-    padding-bottom: 90px; /* room for fixed player */
+    padding-bottom: 90px;
   }
 
-  /* --- backgrounds per section --- */
   .bg-red { background: radial-gradient(ellipse at 30% 20%, var(--blood-deep) 0%, var(--bg) 60%); }
   .bg-moon { background: radial-gradient(ellipse at 70% 30%, #1a1a28 0%, var(--bg) 65%); }
   .bg-crypt { background: radial-gradient(ellipse at 50% 80%, #1a0a0a 0%, var(--bg-deep) 70%); }
   .bg-ash { background: radial-gradient(ellipse at 50% 50%, #181014 0%, var(--bg) 70%); }
 
-  /* --- animations --- */
   @keyframes flicker {
     0%, 100% { opacity: 1; transform: scale(1); }
     45% { opacity: 0.82; transform: scale(0.98); }
     50% { opacity: 0.95; transform: scale(1.01); }
     55% { opacity: 0.78; transform: scale(0.97); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
   }
   @keyframes slowPulse {
     0%, 100% { opacity: 0.4; }
@@ -68,7 +62,6 @@
   .moon { animation: slowPulse 6s ease-in-out infinite; }
   .drift { animation: drift 8s ease-in-out infinite; }
 
-  /* --- scroll reveal --- */
   .reveal {
     opacity: 0;
     transform: translateY(20px);
@@ -79,17 +72,9 @@
     transform: translateY(0);
   }
 
-  /* --- sections --- */
-  section {
-    padding: 6rem 2rem;
-    position: relative;
-  }
-  .container {
-    max-width: 640px;
-    margin: 0 auto;
-  }
+  section { padding: 6rem 2rem; position: relative; }
+  .container { max-width: 640px; margin: 0 auto; }
 
-  /* --- hero --- */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -125,7 +110,6 @@
     margin-top: 4rem;
   }
 
-  /* --- lyrics --- */
   .lyric {
     font-size: 1.25rem;
     line-height: 1.9;
@@ -134,6 +118,9 @@
     font-family: var(--serif);
     font-style: italic;
     letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    padding: 0.15rem 0;
   }
   .lyric.accent {
     color: var(--blood);
@@ -150,6 +137,17 @@
     font-size: 1.4rem;
     font-style: italic;
   }
+
+  body.sync-active .lyric:not(.active) {
+    opacity: 0.28;
+  }
+  body.sync-active .lyric.active {
+    color: var(--blood-bright) !important;
+    opacity: 1;
+    text-shadow: 0 0 20px rgba(233, 96, 96, 0.25);
+    transform: translateX(4px);
+  }
+  .lyric:hover { color: var(--blood); }
 
   .verse-gap { margin-top: 1.5rem; }
 
@@ -172,7 +170,6 @@
     border: 0;
   }
 
-  /* --- audio player --- */
   .player {
     position: fixed;
     bottom: 0;
@@ -257,8 +254,7 @@
   }
   .progress-fill {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     height: 100%;
     background: var(--blood);
     border-radius: 1px;
@@ -280,6 +276,32 @@
   }
   .progress:hover .progress-thumb { opacity: 1; }
 
+  .toggle-group {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .toggle {
+    background: transparent;
+    border: 1px solid var(--ash);
+    color: var(--ink-whisper);
+    font-family: var(--sans);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .toggle:hover { color: var(--blood); border-color: var(--blood-dark); }
+  .toggle.on {
+    color: var(--blood);
+    border-color: var(--blood-dark);
+    background: rgba(201, 74, 74, 0.08);
+  }
+
   .upload-hint {
     font-family: var(--sans);
     font-size: 0.7rem;
@@ -292,23 +314,17 @@
     transition: all 0.2s;
     flex-shrink: 0;
   }
-  .upload-hint:hover {
-    color: var(--blood);
-    border-color: var(--blood-dark);
-  }
+  .upload-hint:hover { color: var(--blood); border-color: var(--blood-dark); }
 
-  /* --- blood drips (decorative) --- */
   .drip-layer {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     width: 100%;
     height: 140px;
     opacity: 0.15;
     pointer-events: none;
   }
 
-  /* --- final section --- */
   .end-section {
     text-align: center;
     min-height: 80vh;
@@ -317,21 +333,20 @@
     justify-content: center;
   }
 
-  /* --- mobile --- */
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     section { padding: 4rem 1.5rem; }
     .lyric { font-size: 1.1rem; }
     .lyric.whisper, .lyric.final { font-size: 1.2rem; }
-    .player { padding: 0.75rem 1rem; gap: 0.6rem; }
+    .player { padding: 0.75rem 0.75rem; gap: 0.5rem; flex-wrap: wrap; }
     .player .song-sub { display: none; }
-    .player .song-title { font-size: 0.7rem; max-width: 80px; }
+    .player .song-title { font-size: 0.7rem; max-width: 90px; }
+    .toggle { font-size: 0.55rem; padding: 5px 7px; letter-spacing: 0.1em; }
     .upload-hint { font-size: 0.6rem; padding: 4px 6px; }
   }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <section class="hero bg-red">
   <svg class="candle" width="50" height="85" viewBox="0 0 50 85" aria-hidden="true">
     <ellipse cx="25" cy="16" rx="8" ry="16" fill="#ff9a3c" opacity="0.35"/>
@@ -345,33 +360,30 @@
   <p class="scroll-cue">scroll slowly</p>
 </section>
 
-<!-- VERSE 1 -->
 <section class="bg-red">
   <div class="container">
     <p class="interlude reveal">She sits at the edge of his bed. The candles have burned low. He is still warm, still breathing, still hers — for now.</p>
     <hr class="divider reveal" />
-    <p class="lyric reveal">I watched you in the candle rain</p>
-    <p class="lyric reveal">Warm blood beneath your fragile skin</p>
-    <p class="lyric reveal">You smiled as if I could be saved</p>
-    <p class="lyric reveal">As if the beast would not begin</p>
-    <p class="lyric reveal verse-gap">Your hands were light upon my face</p>
-    <p class="lyric reveal">You called me something close to pure</p>
-    <p class="lyric reveal">But I have worn too many graves</p>
-    <p class="lyric reveal">To think that love could be the cure</p>
+    <p class="lyric reveal" data-t="41.40">I watched you in the candle rain</p>
+    <p class="lyric reveal" data-t="44.74">Warm blood beneath your fragile skin</p>
+    <p class="lyric reveal" data-t="47.94">You smiled as if I could be saved</p>
+    <p class="lyric reveal" data-t="51.34">As if the beast would not begin</p>
+    <p class="lyric reveal verse-gap" data-t="54.42">Your hands were light upon my face</p>
+    <p class="lyric reveal" data-t="57.66">You called me something close to pure</p>
+    <p class="lyric reveal" data-t="60.96">But I have worn too many graves</p>
+    <p class="lyric reveal" data-t="64.14">To think that love could be the cure</p>
   </div>
 </section>
 
-<!-- PRE-CHORUS 1 -->
 <section class="bg-crypt">
   <div class="container">
-    <p class="lyric reveal">Every night I hear your heartbeat</p>
-    <p class="lyric reveal">Like a hymn beneath the floor</p>
-    <p class="lyric reveal">And the hunger claws inside me</p>
-    <p class="lyric reveal">Begging me for more</p>
+    <p class="lyric reveal" data-t="67.44">Every night I hear your heartbeat</p>
+    <p class="lyric reveal" data-t="70.62">Like a hymn beneath the floor</p>
+    <p class="lyric reveal" data-t="73.86">And the hunger claws inside me</p>
+    <p class="lyric reveal" data-t="76.72">Begging me for more</p>
   </div>
 </section>
 
-<!-- CHORUS 1 -->
 <section class="bg-red">
   <svg class="drip-layer" viewBox="0 0 640 140" preserveAspectRatio="none" aria-hidden="true">
     <path d="M100 0 L100 60 Q100 75 105 85 L105 100" stroke="#8a0a0a" stroke-width="1.5" fill="none"/>
@@ -382,18 +394,17 @@
     <circle cx="540" cy="45" r="2" fill="#8a0a0a"/>
   </svg>
   <div class="container">
-    <p class="lyric accent reveal">So kiss me before the grave</p>
-    <p class="lyric accent reveal">Before my mouth becomes your end</p>
-    <p class="lyric accent reveal">Before these fangs choose hunger</p>
-    <p class="lyric accent reveal">Over lover, over friend</p>
-    <p class="lyric accent reveal verse-gap">I would rather break your heart</p>
-    <p class="lyric accent reveal">Than drink the life behind your eyes</p>
-    <p class="lyric accent reveal">If I cannot keep you human</p>
-    <p class="lyric accent reveal">Then tonight, my love, you die</p>
+    <p class="lyric accent reveal" data-t="79.54">So kiss me before the grave</p>
+    <p class="lyric accent reveal" data-t="82.82">Before my mouth becomes your end</p>
+    <p class="lyric accent reveal" data-t="86.04">Before these fangs choose hunger</p>
+    <p class="lyric accent reveal" data-t="88.96">Over lover, over friend</p>
+    <p class="lyric accent reveal verse-gap" data-t="92.10">I would rather break your heart</p>
+    <p class="lyric accent reveal" data-t="94.96">Than drink the life behind your eyes</p>
+    <p class="lyric accent reveal" data-t="98.62">If I cannot keep you human</p>
+    <p class="lyric accent reveal" data-t="101.74">Then tonight, my love, you die</p>
   </div>
 </section>
 
-<!-- VERSE 2 -->
 <section class="bg-moon">
   <div class="container">
     <svg class="moon drift" width="100" height="100" viewBox="0 0 100 100" style="display:block; margin: 0 auto 2rem;" aria-hidden="true">
@@ -404,109 +415,102 @@
     </svg>
     <p class="interlude reveal">He dreams of a future. She has no future, only the long cold ache of never ending.</p>
     <hr class="divider reveal" />
-    <p class="lyric reveal">You dream of dawn and open fields</p>
-    <p class="lyric reveal">I dream of crypts and poisoned snow</p>
-    <p class="lyric reveal">You speak of years and growing old</p>
-    <p class="lyric reveal">There is no age in what I know</p>
-    <p class="lyric reveal verse-gap">Your neck beneath the silver moon</p>
-    <p class="lyric reveal">Has become my sweetest sin</p>
-    <p class="lyric reveal">And every moment that I stay</p>
-    <p class="lyric reveal">Brings death a little closer in</p>
+    <p class="lyric reveal" data-t="110.48">You dream of dawn and open fields</p>
+    <p class="lyric reveal" data-t="122.54">I dream of crypts and poisoned snow</p>
+    <p class="lyric reveal" data-t="125.72">You speak of years and growing old</p>
+    <p class="lyric reveal" data-t="128.96">There is no age in what I know</p>
+    <p class="lyric reveal verse-gap" data-t="132.14">Your neck beneath the silver moon</p>
+    <p class="lyric reveal" data-t="135.82">Has become my sweetest sin</p>
+    <p class="lyric reveal" data-t="138.70">And every moment that I stay</p>
+    <p class="lyric reveal" data-t="141.88">Brings death a little closer in</p>
   </div>
 </section>
 
-<!-- PRE-CHORUS 2 -->
 <section class="bg-crypt">
   <div class="container">
-    <p class="lyric reveal">I can feel the beast awaken</p>
-    <p class="lyric reveal">With every breath you give to me</p>
-    <p class="lyric reveal">And I know the price of wanting</p>
-    <p class="lyric reveal">What can never be</p>
+    <p class="lyric reveal" data-t="145.20">I can feel the beast awaken</p>
+    <p class="lyric reveal" data-t="147.74">With every breath you give to me</p>
+    <p class="lyric reveal" data-t="151.58">And I know the price of wanting</p>
+    <p class="lyric reveal" data-t="154.44">What can never be</p>
   </div>
 </section>
 
-<!-- CHORUS 2 -->
 <section class="bg-red">
   <div class="container">
-    <p class="lyric accent reveal">So kiss me before the grave</p>
-    <p class="lyric accent reveal">Before my mouth becomes your end</p>
-    <p class="lyric accent reveal">Before these fangs choose hunger</p>
-    <p class="lyric accent reveal">Over lover, over friend</p>
-    <p class="lyric accent reveal verse-gap">I would rather break your heart</p>
-    <p class="lyric accent reveal">Than drink the life behind your eyes</p>
-    <p class="lyric accent reveal">If I cannot keep you human</p>
-    <p class="lyric accent reveal">Then tonight, my love, you die</p>
+    <p class="lyric accent reveal" data-t="157.26">So kiss me before the grave</p>
+    <p class="lyric accent reveal" data-t="160.52">Before my mouth becomes your end</p>
+    <p class="lyric accent reveal" data-t="163.74">Before these fangs choose hunger</p>
+    <p class="lyric accent reveal" data-t="166.64">Over lover, over friend</p>
+    <p class="lyric accent reveal verse-gap" data-t="169.80">I would rather break your heart</p>
+    <p class="lyric accent reveal" data-t="172.60">Than drink the life behind your eyes</p>
+    <p class="lyric accent reveal" data-t="176.30">If I cannot keep you human</p>
+    <p class="lyric accent reveal" data-t="179.46">Then tonight, my love, you die</p>
   </div>
 </section>
 
-<!-- VERSE 3 -->
 <section class="bg-crypt">
   <div class="container">
     <p class="interlude reveal">The candles have gone out. The prayer she cannot speak is his name.</p>
     <hr class="divider reveal" />
-    <p class="lyric reveal">Your name still burns on lifeless lips</p>
-    <p class="lyric reveal">A prayer I do not dare repeat</p>
-    <p class="lyric reveal">The moon bears witness to my grief</p>
-    <p class="lyric reveal">As shadows gather at your feet</p>
-    <p class="lyric reveal verse-gap">I trace the veins beneath your skin</p>
-    <p class="lyric reveal">Like scripture I was born to stain</p>
-    <p class="lyric reveal">And in the silence of this love</p>
-    <p class="lyric reveal">I choose your death above your pain</p>
+    <p class="lyric reveal" data-t="210.08">Your name still burns on lifeless lips</p>
+    <p class="lyric reveal" data-t="212.92">A prayer I do not dare repeat</p>
+    <p class="lyric reveal" data-t="216.14">The moon bears witness to my grief</p>
+    <p class="lyric reveal" data-t="219.42">As shadows gather at your feet</p>
+    <p class="lyric reveal verse-gap" data-t="222.64">I trace the veins beneath your skin</p>
+    <p class="lyric reveal" data-t="225.74">Like scripture I was born to stain</p>
+    <p class="lyric reveal" data-t="228.92">And in the silence of this love</p>
+    <p class="lyric reveal" data-t="232.20">I choose your death above your pain</p>
   </div>
 </section>
 
-<!-- BRIDGE -->
 <section class="bg-ash">
   <div class="container">
-    <p class="lyric reveal">Do not call this mercy</p>
-    <p class="lyric reveal">Do not call me kind</p>
-    <p class="lyric reveal">I am carving out the only mercy</p>
-    <p class="lyric reveal">My cursed hands can find</p>
-    <p class="lyric reveal verse-gap">Better by my sorrow</p>
-    <p class="lyric reveal">Than by my thirst undone</p>
-    <p class="lyric reveal">Better in my arms as death</p>
-    <p class="lyric reveal">Than living as the damned become</p>
+    <p class="lyric reveal" data-t="235.74">Do not call this mercy</p>
+    <p class="lyric reveal" data-t="239.10">Do not call me kind</p>
+    <p class="lyric reveal" data-t="241.34">I am carving out the only mercy</p>
+    <p class="lyric reveal" data-t="245.42">My cursed hands can find</p>
+    <p class="lyric reveal verse-gap" data-t="249.26">Better by my sorrow</p>
+    <p class="lyric reveal" data-t="252.14">Than by my thirst undone</p>
+    <p class="lyric reveal" data-t="255.12">Better in my arms as death</p>
+    <p class="lyric reveal" data-t="258.08">Than living as the damned become</p>
   </div>
 </section>
 
-<!-- ACOUSTIC BREAKDOWN -->
 <section class="bg-ash" style="border-top: 1px solid #2a1a1a; border-bottom: 1px solid #2a1a1a;">
   <div class="container">
     <p class="interlude reveal" style="color: var(--ink-muted);">Here the music falls away. Only a single guitar. Only her voice, breaking.</p>
     <hr class="divider reveal" />
-    <p class="lyric whisper reveal">Lay your head against me now</p>
-    <p class="lyric whisper reveal">Hear the monster weep</p>
-    <p class="lyric whisper reveal">I was never made for heaven</p>
-    <p class="lyric whisper reveal">I was only made to reap</p>
-    <p class="lyric whisper reveal verse-gap">Ruins where the roses bloom</p>
-    <p class="lyric whisper reveal">Ashes where the angels hide</p>
-    <p class="lyric whisper reveal">And the only thing I ever loved</p>
-    <p class="lyric final reveal">I must destroy tonight</p>
+    <p class="lyric whisper reveal" data-t="274.70">Lay your head against me now</p>
+    <p class="lyric whisper reveal" data-t="277.98">Hear the monster weep</p>
+    <p class="lyric whisper reveal" data-t="280.48">I was never made for heaven</p>
+    <p class="lyric whisper reveal" data-t="283.74">I was only made to reap</p>
+    <p class="lyric whisper reveal verse-gap" data-t="286.80">Ruins where the roses bloom</p>
+    <p class="lyric whisper reveal" data-t="289.98">Ashes where the angels hide</p>
+    <p class="lyric whisper reveal" data-t="293.16">And the only thing I ever loved</p>
+    <p class="lyric final reveal" data-t="297.76">I must destroy tonight</p>
   </div>
 </section>
 
-<!-- FINAL CHORUS -->
 <section class="bg-red">
   <div class="container">
-    <p class="lyric accent reveal">So kiss me before the grave</p>
-    <p class="lyric accent reveal">Before eternity turns cruel</p>
-    <p class="lyric accent reveal">Before I drag your soul with mine</p>
-    <p class="lyric accent reveal">Into this endless tomb</p>
-    <p class="lyric accent reveal verse-gap">I would rather stain my hands</p>
-    <p class="lyric accent reveal">Than watch your innocence decay</p>
-    <p class="lyric accent reveal">If I must become your ending</p>
-    <p class="lyric accent reveal">Then love will kill you clean today</p>
+    <p class="lyric accent reveal" data-t="299.92">So kiss me before the grave</p>
+    <p class="lyric accent reveal" data-t="303.20">Before eternity turns cruel</p>
+    <p class="lyric accent reveal" data-t="306.40">Before I drag your soul with mine</p>
+    <p class="lyric accent reveal" data-t="309.56">Into this endless tomb</p>
+    <p class="lyric accent reveal verse-gap" data-t="312.56">I would rather stain my hands</p>
+    <p class="lyric accent reveal" data-t="315.22">Than watch your innocence decay</p>
+    <p class="lyric accent reveal" data-t="318.80">If I must become your ending</p>
+    <p class="lyric accent reveal" data-t="322.38">Then love will kill you clean today</p>
   </div>
 </section>
 
-<!-- OUTRO -->
 <section class="bg-crypt end-section">
   <div class="container">
-    <p class="lyric whisper reveal">One last breath</p>
-    <p class="lyric whisper reveal">One last prayer</p>
-    <p class="lyric whisper reveal">One last taste of mortal air</p>
-    <p class="lyric final reveal verse-gap">I loved you more than hunger</p>
-    <p class="lyric final reveal">That is why I leave you dead</p>
+    <p class="lyric whisper reveal" data-t="326.82">One last breath</p>
+    <p class="lyric whisper reveal" data-t="328.40">One last prayer</p>
+    <p class="lyric whisper reveal" data-t="330.00">One last taste of mortal air</p>
+    <p class="lyric final reveal verse-gap" data-t="332.88">I loved you more than hunger</p>
+    <p class="lyric final reveal" data-t="336.36">That is why I leave you dead</p>
     <hr class="divider reveal" style="margin-top: 5rem;" />
     <svg width="36" height="60" viewBox="0 0 36 60" style="margin: 2rem auto 1rem; display: block; opacity: 0.45;" aria-hidden="true">
       <rect x="14" y="18" width="8" height="34" fill="#5a4838"/>
@@ -516,7 +520,6 @@
   </div>
 </section>
 
-<!-- AUDIO PLAYER -->
 <div class="player" role="region" aria-label="Audio player">
   <button class="play-btn" id="playBtn" aria-label="Play">
     <svg id="iconPlay" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
@@ -539,25 +542,29 @@
     </div>
     <span class="time" id="timeDuration">0:00</span>
   </div>
-  <label class="upload-hint" id="uploadLabel" for="audioUpload">load audio</label>
+  <div class="toggle-group">
+    <button class="toggle on" id="syncToggle" title="Highlight the current lyric">Sync</button>
+    <button class="toggle on" id="followToggle" title="Auto-scroll to keep current line in view">Follow</button>
+  </div>
+  <label class="upload-hint" id="uploadLabel" for="audioUpload" style="display:none;">load audio</label>
   <input type="file" id="audioUpload" accept="audio/*" style="display: none;" />
   <audio id="audio" preload="metadata"></audio>
 </div>
 
 <script>
-  // --- scroll reveal ---
+  // Scroll reveal
   const revealEls = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
+  const revealObs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        revealObs.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-  revealEls.forEach(el => observer.observe(el));
+  revealEls.forEach(el => revealObs.observe(el));
 
-  // --- audio player ---
+  // Player refs
   const audio = document.getElementById('audio');
   const playBtn = document.getElementById('playBtn');
   const iconPlay = document.getElementById('iconPlay');
@@ -569,10 +576,70 @@
   const timeDuration = document.getElementById('timeDuration');
   const uploadInput = document.getElementById('audioUpload');
   const uploadLabel = document.getElementById('uploadLabel');
+  const syncToggle = document.getElementById('syncToggle');
+  const followToggle = document.getElementById('followToggle');
 
-  // If there's an audio.mp3 next to the HTML, auto-load it.
-  // Otherwise, user can click "load audio" to pick a local file.
   audio.src = 'audio.mp3';
+
+  // Lyric timestamps (from LRC)
+  const lyricEls = Array.from(document.querySelectorAll('.lyric[data-t]'))
+    .map(el => ({ el, t: parseFloat(el.dataset.t) }))
+    .sort((a, b) => a.t - b.t);
+
+  let currentIdx = -1;
+  let userScrolling = false;
+  let userScrollTimer = null;
+
+  // Don't auto-scroll while the user is scrolling manually
+  window.addEventListener('scroll', () => {
+    userScrolling = true;
+    clearTimeout(userScrollTimer);
+    userScrollTimer = setTimeout(() => { userScrolling = false; }, 1500);
+  }, { passive: true });
+
+  // Click a lyric to seek
+  lyricEls.forEach(({ el, t }) => {
+    el.addEventListener('click', () => {
+      if (!audio.duration) return;
+      audio.currentTime = t;
+      if (audio.paused) audio.play().catch(() => {});
+    });
+  });
+
+  function updateSync() {
+    const time = audio.currentTime;
+    let idx = -1;
+    for (let i = 0; i < lyricEls.length; i++) {
+      if (lyricEls[i].t <= time) idx = i;
+      else break;
+    }
+    if (idx !== currentIdx) {
+      if (currentIdx >= 0) lyricEls[currentIdx].el.classList.remove('active');
+      if (idx >= 0) {
+        lyricEls[idx].el.classList.add('active');
+        if (followToggle.classList.contains('on') && !userScrolling && !audio.paused) {
+          lyricEls[idx].el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+      currentIdx = idx;
+    }
+  }
+
+  syncToggle.addEventListener('click', () => {
+    syncToggle.classList.toggle('on');
+    if (syncToggle.classList.contains('on')) {
+      document.body.classList.add('sync-active');
+    } else {
+      document.body.classList.remove('sync-active');
+      lyricEls.forEach(({ el }) => el.classList.remove('active'));
+      currentIdx = -1;
+    }
+  });
+  followToggle.addEventListener('click', () => {
+    followToggle.classList.toggle('on');
+  });
+
+  document.body.classList.add('sync-active');
 
   function formatTime(sec) {
     if (isNaN(sec) || sec === Infinity) return '0:00';
@@ -588,15 +655,9 @@
   }
 
   playBtn.addEventListener('click', () => {
-    if (!audio.src || audio.error) {
-      uploadInput.click();
-      return;
-    }
+    if (!audio.src || audio.error) { uploadInput.click(); return; }
     if (audio.paused) {
-      audio.play().catch(err => {
-        console.warn('Playback failed:', err);
-        uploadInput.click();
-      });
+      audio.play().catch(err => { console.warn(err); uploadInput.click(); });
     } else {
       audio.pause();
     }
@@ -605,23 +666,20 @@
   audio.addEventListener('play', () => setPlayIcon(true));
   audio.addEventListener('pause', () => setPlayIcon(false));
   audio.addEventListener('ended', () => setPlayIcon(false));
-
   audio.addEventListener('loadedmetadata', () => {
     timeDuration.textContent = formatTime(audio.duration);
     uploadLabel.style.display = 'none';
   });
-
   audio.addEventListener('timeupdate', () => {
     if (audio.duration) {
       const pct = (audio.currentTime / audio.duration) * 100;
       progressFill.style.width = pct + '%';
       progressThumb.style.left = pct + '%';
       timeCurrent.textContent = formatTime(audio.currentTime);
+      if (syncToggle.classList.contains('on')) updateSync();
     }
   });
-
   audio.addEventListener('error', () => {
-    // No audio.mp3 found; show the upload option
     uploadLabel.style.display = 'inline-block';
   });
 
