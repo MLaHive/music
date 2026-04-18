@@ -371,6 +371,40 @@
     justify-content: center;
   }
 
+  /* --- streaming links at the end --- */
+  .streaming {
+    margin-top: 2.5rem;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-whisper);
+    text-transform: uppercase;
+  }
+  .streaming .label {
+    display: block;
+    margin-bottom: 1rem;
+    font-style: italic;
+    letter-spacing: 0.25em;
+    text-transform: none;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--ink-dim);
+  }
+  .streaming a {
+    color: var(--blood);
+    text-decoration: none;
+    padding: 0 0.75rem;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+  }
+  .streaming a:hover {
+    color: var(--blood-bright);
+    letter-spacing: 0.35em;
+  }
+  .streaming .dot {
+    color: var(--ash);
+    padding: 0;
+  }
+
   @media (max-width: 700px) {
     section { padding: 4rem 1.5rem; }
     .lyric { font-size: 1.1rem; }
@@ -559,6 +593,12 @@
       <line x1="18" y1="18" x2="18" y2="10" stroke="#2a1818" stroke-width="1.2"/>
       <circle cx="18" cy="8" r="1.8" fill="#3a2818" opacity="0.6"/>
     </svg>
+    <div class="streaming reveal">
+      <span class="label">Take her with you</span>
+      <a href="https://music.apple.com/us/album/kiss-before-the-grave-single/1892946253" target="_blank" rel="noopener">Apple Music</a>
+      <span class="dot">·</span>
+      <a href="https://open.spotify.com/album/0y2rInEwVww8cL6WL8bEv2?si=hFqXcQerQR-FxTr-8B9JjQ" target="_blank" rel="noopener">Spotify</a>
+    </div>
   </div>
 </section>
 
