@@ -258,6 +258,43 @@
   }
   .lyric:hover { color: var(--blood); }
 
+  /* --- reveal-on-sung mode --- */
+  /* In reveal mode, lines are hidden until they've been sung */
+  body.reveal-mode .lyric[data-t]:not(.revealed) {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    overflow: hidden;
+    transform: translateY(8px);
+    transition: opacity 1s ease-out, transform 1s ease-out, max-height 0.5s ease-out 0.3s, margin 0.5s ease-out 0.3s, padding 0.5s ease-out 0.3s, line-height 0.5s ease-out 0.3s;
+    pointer-events: none;
+  }
+  /* verse-gap margin also collapses when line is hidden */
+  body.reveal-mode .lyric.verse-gap:not(.revealed) {
+    margin-top: 0;
+  }
+  /* Once revealed, the line fades in with proper spacing */
+  body.reveal-mode .lyric[data-t].revealed {
+    opacity: 1;
+    max-height: 5em;
+    line-height: 1.9;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  }
+  /* When revealed AND currently active, the sync highlight still applies */
+  body.reveal-mode.sync-active .lyric.revealed.active {
+    color: var(--blood-bright) !important;
+    opacity: 1;
+    text-shadow: 0 0 20px rgba(233, 96, 96, 0.25);
+    transform: translateX(4px);
+  }
+  body.reveal-mode.sync-active .lyric.revealed:not(.active) {
+    opacity: 0.35;
+  }
+
   .verse-gap { margin-top: 1.5rem; }
 
   .interlude {
@@ -476,6 +513,35 @@
     padding: 0;
   }
 
+  /* --- secondary artist link, after streaming --- */
+  .artist-link {
+    margin-top: 2rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--ink-whisper);
+    letter-spacing: 0.02em;
+  }
+  .artist-link a {
+    color: var(--ink-dim);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    padding-bottom: 2px;
+  }
+  .artist-link a:hover {
+    color: var(--blood);
+    border-bottom-color: var(--blood-dark);
+  }
+  .artist-link .arrow {
+    display: inline-block;
+    margin-left: 4px;
+    transition: transform 0.3s ease;
+  }
+  .artist-link a:hover .arrow {
+    transform: translateX(3px);
+  }
+
   @media (max-width: 700px) {
     section { padding: 4rem 1.5rem; }
     .lyric { font-size: 1.1rem; }
@@ -691,6 +757,9 @@
       <span class="dot">·</span>
       <a href="https://open.spotify.com/album/0y2rInEwVww8cL6WL8bEv2?si=hFqXcQerQR-FxTr-8B9JjQ" target="_blank" rel="noopener">Spotify</a>
     </div>
+    <p class="artist-link reveal">
+      <a href="https://linktr.ee/marklahive" target="_blank" rel="noopener">find more of mark lahive<span class="arrow">→</span></a>
+    </p>
   </div>
 </section>
 
@@ -717,6 +786,7 @@
     <span class="time" id="timeDuration">0:00</span>
   </div>
   <div class="toggle-group">
+    <button class="toggle" id="revealToggle" title="Toggle to show all lyrics at once">Reveal all</button>
     <button class="toggle on" id="syncToggle" title="Highlight the current lyric">Sync</button>
     <button class="toggle on" id="followToggle" title="Auto-scroll to keep current line in view">Follow</button>
   </div>
@@ -752,6 +822,7 @@
   const uploadLabel = document.getElementById('uploadLabel');
   const syncToggle = document.getElementById('syncToggle');
   const followToggle = document.getElementById('followToggle');
+  const revealToggle = document.getElementById('revealToggle');
 
   audio.src = 'audio.mp3';
 
@@ -784,7 +855,13 @@
     const time = audio.currentTime;
     let idx = -1;
     for (let i = 0; i < lyricEls.length; i++) {
-      if (lyricEls[i].t <= time) idx = i;
+      if (lyricEls[i].t <= time) {
+        idx = i;
+        // Mark as revealed (once revealed, stays revealed)
+        if (!lyricEls[i].el.classList.contains('revealed')) {
+          lyricEls[i].el.classList.add('revealed');
+        }
+      }
       else break;
     }
     if (idx !== currentIdx) {
@@ -812,8 +889,25 @@
   followToggle.addEventListener('click', () => {
     followToggle.classList.toggle('on');
   });
+  revealToggle.addEventListener('click', () => {
+    revealToggle.classList.toggle('on');
+    if (revealToggle.classList.contains('on')) {
+      // ON = show all lyrics immediately
+      document.body.classList.remove('reveal-mode');
+      lyricEls.forEach(({ el }) => el.classList.add('revealed'));
+    } else {
+      // OFF = hide lyrics, reveal only as sung
+      document.body.classList.add('reveal-mode');
+      // Clear 'revealed' from any line that hasn't been reached yet
+      const time = audio.currentTime || 0;
+      lyricEls.forEach(({ el, t }) => {
+        if (t > time) el.classList.remove('revealed');
+      });
+    }
+  });
 
   document.body.classList.add('sync-active');
+  document.body.classList.add('reveal-mode');
 
   function formatTime(sec) {
     if (isNaN(sec) || sec === Infinity) return '0:00';
