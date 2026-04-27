@@ -3,7 +3,20 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kiss Before the Grave</title>
+<title>Kiss Before the Grave — Mark LaHive</title>
+<meta name="description" content="Kiss Before the Grave by Mark LaHive — a confession in seven movements. She loved him too well to let him live." />
+
+<!-- Social link previews -->
+<meta property="og:title" content="Kiss Before the Grave — Mark LaHive" />
+<meta property="og:description" content="A confession in seven movements. She loved him too well to let him live." />
+<meta property="og:type" content="music.song" />
+<meta property="og:image" content="https://mlahive.github.io/music/covers/kiss-before-the-grave.jpg" />
+<meta property="og:url" content="https://mlahive.github.io/music/kiss-before-the-grave/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Kiss Before the Grave — Mark LaHive" />
+<meta name="twitter:description" content="A confession in seven movements." />
+<meta name="twitter:image" content="https://mlahive.github.io/music/covers/kiss-before-the-grave.jpg" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -217,6 +230,28 @@
 
   .play-btn.pulse {
     animation: ringPulse 2s ease-out infinite;
+  }
+
+  /* --- hero cover artwork --- */
+  @keyframes coverGlow {
+    0%, 100% { box-shadow: 0 0 24px rgba(201, 74, 74, 0.18), 0 0 0 1px rgba(74, 32, 32, 0.6); }
+    50% { box-shadow: 0 0 36px rgba(201, 74, 74, 0.32), 0 0 0 1px rgba(107, 32, 32, 0.8); }
+  }
+  .hero-cover {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 2.5rem;
+    display: block;
+    border-radius: 2px;
+    object-fit: cover;
+    animation: coverGlow 6s ease-in-out infinite;
+    transition: transform 0.6s ease;
+  }
+  .hero-cover:hover {
+    transform: scale(1.02);
+  }
+  @media (max-width: 600px) {
+    .hero-cover { width: 180px; height: 180px; }
   }
 
   .lyric {
@@ -557,13 +592,7 @@
 <body>
 
 <section class="hero bg-red">
-  <svg class="candle" width="50" height="85" viewBox="0 0 50 85" aria-hidden="true">
-    <ellipse cx="25" cy="16" rx="8" ry="16" fill="#ff9a3c" opacity="0.35"/>
-    <ellipse cx="25" cy="18" rx="4.5" ry="12" fill="#ffcc66"/>
-    <ellipse cx="25" cy="20" rx="2.2" ry="7" fill="#fff4d6"/>
-    <rect x="21" y="34" width="8" height="46" fill="#d4c4a8"/>
-    <line x1="25" y1="34" x2="25" y2="26" stroke="#3a2818" stroke-width="1.2"/>
-  </svg>
+  <img src="https://mlahive.github.io/music/covers/kiss-before-the-grave.jpg" alt="Kiss Before The Grave album cover" class="hero-cover" />
   <h1>Kiss Before<br/>the Grave</h1>
   <p class="subtitle">She loved him too well to let him live.</p>
   <p class="play-cue" id="playCue">
