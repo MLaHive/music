@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mark LaHive — Heavy Metal Storyteller</title>
+<meta name="description" content="Mark LaHive — heavy metal songwriter from Orlando, Florida. Norse mythology, gothic confession, and the chaos of human conflict. Listen to the catalog." />
+
+<!-- Social link previews -->
+<meta property="og:title" content="Mark LaHive — Heavy Metal Storyteller" />
+<meta property="og:description" content="Norse mythology, gothic confession, and the chaos of human conflict." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://mlahive.github.io/music/assets/raven.png" />
+<meta property="og:url" content="https://mlahive.github.io/music/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Mark LaHive — Heavy Metal Storyteller" />
+<meta name="twitter:description" content="Norse mythology, gothic confession, and the chaos of human conflict." />
+<meta name="twitter:image" content="https://mlahive.github.io/music/assets/raven.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --display: 'Cinzel', serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --bg: #050304;
+    --bg-deep: #020102;
+    --ink: #f0dcdc;
+    --ink-muted: #b89090;
+    --ink-dim: #8a6a6a;
+    --ink-whisper: #5a3a3a;
+    --crimson: #c94a4a;
+    --crimson-bright: #e86060;
+    --crimson-deep: #6b2020;
+    --crimson-shadow: #2a0a10;
+    --norse: #6a8aa8;
+    --conflict: #8a8a8a;
+    --ash: #2a1010;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* --- backgrounds --- */
+  .bg-hero { background: radial-gradient(ellipse at 50% 60%, #1a0606 0%, #0a0608 50%, var(--bg) 100%); }
+  .bg-section { background: radial-gradient(ellipse at 30% 0%, #1a0a0a 0%, var(--bg) 70%); }
+  .bg-section-alt { background: var(--bg); }
+  .bg-footer { background: radial-gradient(ellipse at 50% 100%, #1a0a0a 0%, var(--bg-deep) 70%); }
+
+  /* --- animations --- */
+  @keyframes drift1 { 0%,100% { transform: translateX(0) translateY(0); } 50% { transform: translateX(15px) translateY(-10px); } }
+  @keyframes drift2 { 0%,100% { transform: translateX(0) translateY(0); } 50% { transform: translateX(-20px) translateY(-8px); } }
+  @keyframes ember { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 0.7; } 100% { transform: translateY(-220px) translateX(var(--ember-drift, 30px)); opacity: 0; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes ravenGlow {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(201, 74, 74, 0.18)); }
+    50% { filter: drop-shadow(0 0 50px rgba(201, 74, 74, 0.32)); }
+  }
+
+  .smoke1 { animation: drift1 22s ease-in-out infinite; }
+  .smoke2 { animation: drift2 28s ease-in-out infinite; }
+  .ember { animation: ember 9s linear infinite; }
+  .raven-glow { animation: ravenGlow 8s ease-in-out infinite; }
+  .fadeup { animation: fadeUp 1.6s ease-out both; }
+  .fadeup-delay-1 { animation: fadeUp 1.6s ease-out 0.2s both; }
+  .fadeup-delay-2 { animation: fadeUp 1.6s ease-out 0.4s both; }
+  .fadeup-delay-3 { animation: fadeUp 1.6s ease-out 0.6s both; }
+
+  /* --- reveal on scroll --- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.4s ease-out, transform 1.4s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  section { padding: 5rem 2rem; position: relative; }
+  .container { max-width: 720px; margin: 0 auto; }
+
+  /* --- HERO --- */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    overflow: hidden;
+  }
+  .atmosphere {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .raven {
+    width: 320px;
+    max-width: 80vw;
+    height: auto;
+    margin: 0 auto 2rem;
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
+  .pre-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.6em;
+    color: #8a4a4a;
+    text-transform: uppercase;
+    margin: 0 0 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 40px rgba(201, 74, 74, 0.2);
+  }
+  .hero hr {
+    width: 70px;
+    border: 0;
+    height: 1px;
+    background: var(--crimson-deep);
+    margin: 2rem auto 1.75rem;
+    position: relative;
+    z-index: 2;
+  }
+  .hero .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--ink-muted);
+    margin: 0;
+    max-width: 480px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+  }
+  .cta-row {
+    margin-top: 3.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .cta-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border: 1px solid var(--crimson-deep);
+    color: var(--crimson);
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: rgba(201, 74, 74, 0.04);
+    transition: all 0.3s ease;
+    border-radius: 1px;
+  }
+  .cta-btn:hover {
+    background: var(--crimson-deep);
+    color: #f0e4e4;
+    border-color: var(--crimson);
+  }
+  .scroll-cue {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    color: var(--ink-whisper);
+    text-transform: uppercase;
+    margin-top: 2.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* --- SECTION TAGS --- */
+  .tag {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--ink-whisper);
+    text-transform: uppercase;
+    margin: 0 0 1.5rem;
+  }
+
+  /* --- LATEST RELEASE FEATURE CARD --- */
+  .feature-card {
+    display: flex;
+    gap: 1.75rem;
+    align-items: flex-start;
+    padding: 1.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--ash);
+    border-radius: 2px;
+    background: linear-gradient(180deg, rgba(42, 10, 16, 0.3) 0%, rgba(10, 6, 8, 0) 100%);
+    text-decoration: none;
+    transition: all 0.4s ease;
+  }
+  .feature-card:hover {
+    border-color: var(--crimson-deep);
+    transform: translateY(-2px);
+  }
+  .cover-large {
+    width: 140px;
+    height: 140px;
+    flex-shrink: 0;
+    border: 1px solid var(--crimson-deep);
+    border-radius: 1px;
+    object-fit: cover;
+  }
+  .feature-content {
+    flex: 1;
+    min-width: 0;
+  }
+  .feature-eyebrow {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: #8a4a4a;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+  }
+  .feature-card h2 {
+    font-family: var(--display);
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: 0.04em;
+  }
+  .feature-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-muted);
+    margin: 8px 0 14px;
+  }
+  .feature-cta {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--crimson);
+    text-transform: uppercase;
+  }
+
+  /* --- SONG / ALBUM ROWS --- */
+  .song-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--ash);
+    text-decoration: none;
+    transition: padding 0.3s;
+  }
+  .song-link:hover {
+    padding-left: 8px;
+  }
+  .song-link:hover .song-title {
+    color: var(--crimson-bright);
+  }
+  .cover-thumb {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border: 1px solid var(--crimson-deep);
+    border-radius: 1px;
+    object-fit: cover;
+    background: #1a0608;
+  }
+  .song-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .song-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .song-title {
+    font-family: var(--display);
+    font-size: 16px;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    transition: color 0.3s;
+  }
+  .song-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-dim);
+    margin-top: 4px;
+  }
+  .song-meta {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-whisper);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  /* genre tag colors — subtle, embedded in song-meta */
+  .genre-gothic { color: var(--crimson); }
+  .genre-norse { color: var(--norse); }
+  .genre-conflict { color: var(--conflict); }
+
+  /* --- FOOTER --- */
+  .footer {
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    border-top: 1px solid var(--ash);
+    margin-top: 2rem;
+  }
+  .streaming-row {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--crimson);
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .streaming-row a {
+    color: var(--crimson);
+    text-decoration: none;
+    padding: 0 12px;
+    transition: color 0.3s ease;
+  }
+  .streaming-row a:hover {
+    color: var(--crimson-bright);
+  }
+  .streaming-row .sep {
+    color: var(--ash);
+  }
+  .footer-link {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-dim);
+    margin: 1.5rem 0 0;
+  }
+  .footer-link a {
+    color: var(--ink-dim);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .footer-link a:hover {
+    color: var(--crimson);
+    border-bottom-color: var(--crimson-deep);
+  }
+  .footer-location {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--ink-whisper);
+    margin-top: 4rem;
+    text-transform: uppercase;
+  }
+
+  /* --- mobile --- */
+  @media (max-width: 700px) {
+    section { padding: 3.5rem 1.5rem; }
+    .raven { width: 240px; }
+    .hero h1 { font-size: clamp(2.6rem, 11vw, 4.5rem); }
+    .hero .tagline { font-size: 1.05rem; padding: 0 1rem; }
+    .pre-title { font-size: 10px; letter-spacing: 0.4em; }
+
+    .feature-card { flex-direction: column; gap: 1.25rem; padding: 1.25rem; }
+    .cover-large { width: 100%; height: auto; aspect-ratio: 1; max-width: 280px; margin: 0 auto; }
+    .feature-card h2 { font-size: 1.4rem; }
+
+    .song-title { font-size: 14px; }
+    .song-sub { font-size: 13px; }
+    .song-meta { font-size: 9px; letter-spacing: 0.15em; }
+
+    .streaming-row { font-size: 10px; letter-spacing: 0.2em; }
+    .streaming-row a { padding: 0 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero bg-hero">
+  <svg class="atmosphere" viewBox="0 0 720 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="smokeGrad1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#3a0a0a" stop-opacity="0.45"/><stop offset="100%" stop-color="#3a0a0a" stop-opacity="0"/></radialGradient>
+      <radialGradient id="smokeGrad2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#1a0a14" stop-opacity="0.35"/><stop offset="100%" stop-color="#1a0a14" stop-opacity="0"/></radialGradient>
+      <radialGradient id="emberGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffaa44" stop-opacity="1"/><stop offset="100%" stop-color="#ffaa44" stop-opacity="0"/></radialGradient>
+    </defs>
+    <ellipse class="smoke1" cx="180" cy="640" rx="280" ry="200" fill="url(#smokeGrad1)"/>
+    <ellipse class="smoke2" cx="540" cy="680" rx="320" ry="220" fill="url(#smokeGrad2)"/>
+    <ellipse class="smoke1" cx="360" cy="740" rx="400" ry="160" fill="url(#smokeGrad1)" style="animation-delay: -8s; opacity: 0.55;"/>
+    <circle class="ember" cx="180" cy="800" r="2" fill="url(#emberGlow)" style="--ember-drift: 30px;"/>
+    <circle class="ember" cx="320" cy="800" r="1.5" fill="url(#emberGlow)" style="--ember-drift: -20px; animation-delay: -2s;"/>
+    <circle class="ember" cx="500" cy="800" r="2.5" fill="url(#emberGlow)" style="--ember-drift: 40px; animation-delay: -4s;"/>
+    <circle class="ember" cx="240" cy="800" r="1.5" fill="url(#emberGlow)" style="--ember-drift: -15px; animation-delay: -6s;"/>
+    <circle class="ember" cx="580" cy="800" r="2" fill="url(#emberGlow)" style="--ember-drift: 25px; animation-delay: -3s;"/>
+    <circle class="ember" cx="120" cy="800" r="1.8" fill="url(#emberGlow)" style="--ember-drift: 18px; animation-delay: -5s;"/>
+  </svg>
+
+  <img src="assets/raven.png" alt="Watching raven" class="raven raven-glow fadeup" />
+  <p class="pre-title fadeup-delay-1">heavy metal &middot; storyteller</p>
+  <h1 class="fadeup-delay-1">MARK<br/>LAHIVE</h1>
+  <hr class="fadeup-delay-2" />
+  <p class="tagline fadeup-delay-2">norse mythology, gothic confession, and the chaos of human conflict</p>
+  <div class="cta-row fadeup-delay-3">
+    <a href="#latest" class="cta-btn">Enter the catalog</a>
+  </div>
+  <p class="scroll-cue fadeup-delay-3">scroll ↓</p>
+</section>
+
+<!-- LATEST RELEASE -->
+<section class="bg-section" id="latest">
+  <div class="container">
+    <p class="tag reveal">Latest release</p>
+    <a href="my-dark-creation/" class="feature-card reveal">
+      <img src="covers/my-dark-creation.jpg" alt="My Dark Creation cover" class="cover-large" />
+      <div class="feature-content">
+        <p class="feature-eyebrow">released &middot; 2026</p>
+        <h2>My Dark Creation</h2>
+        <p class="feature-sub">a vampire's gift, an inheritance of night</p>
+        <span class="feature-cta">enter the listening room →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- LISTENING ROOMS -->
+<section class="bg-section-alt">
+  <div class="container">
+    <p class="tag reveal">Listening rooms</p>
+
+    <a href="kiss-before-the-grave/" class="song-link reveal">
+      <img src="covers/kiss-before-the-grave.jpg" alt="" class="cover-thumb" />
+      <div class="song-info">
+        <div class="song-title-row">
+          <span class="song-title">Kiss Before the Grave</span>
+          <span class="song-meta"><span class="genre-gothic">gothic</span> &middot; 2026</span>
+        </div>
+        <div class="song-sub">a vampire's confession in seven movements</div>
+      </div>
+    </a>
+
+    <a href="my-dark-creation/" class="song-link reveal">
+      <img src="covers/my-dark-creation.jpg" alt="" class="cover-thumb" />
+      <div class="song-info">
+        <div class="song-title-row">
+          <span class="song-title">My Dark Creation</span>
+          <span class="song-meta"><span class="genre-gothic">gothic</span> &middot; 2026</span>
+        </div>
+        <div class="song-sub">a vampire's gift, an inheritance of night</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<section class="footer bg-footer">
+  <p class="streaming-row">
+    <a href="https://music.apple.com/us/artist/mark-lahive/" target="_blank" rel="noopener">Apple Music</a>
+    <span class="sep">&middot;</span>
+    <a href="https://open.spotify.com/artist/4GD0LQetJnL9czi3tNNsmq" target="_blank" rel="noopener">Spotify</a>
+    <span class="sep">&middot;</span>
+    <a href="#" target="_blank" rel="noopener">YouTube</a>
+    <span class="sep">&middot;</span>
+    <a href="#" target="_blank" rel="noopener">SoundCloud</a>
+  </p>
+  <p class="footer-link">
+    <a href="https://linktr.ee/marklahive" target="_blank" rel="noopener">linktree →</a>
+  </p>
+  <p class="footer-location">orlando, florida</p>
+</section>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
