@@ -577,6 +577,42 @@
     transform: translateX(3px);
   }
 
+  /* --- cross-link between listening rooms --- */
+  .room-link {
+    margin-top: 3rem;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-dim);
+    line-height: 1.7;
+  }
+  .room-link a {
+    display: inline-block;
+    color: var(--blood);
+    text-decoration: none;
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s ease, border-color 0.4s ease, letter-spacing 0.4s ease;
+  }
+  .room-link a:hover {
+    color: #e86060;
+    border-bottom-color: var(--blood-dark);
+    letter-spacing: 0.1em;
+  }
+  .room-link .arrow {
+    display: inline-block;
+    margin-left: 6px;
+    transition: transform 0.3s ease;
+  }
+  .room-link a:hover .arrow {
+    transform: translateX(4px);
+  }
+
   @media (max-width: 700px) {
     section { padding: 4rem 1.5rem; }
     .lyric { font-size: 1.1rem; }
@@ -818,6 +854,13 @@
       <span class="dot">·</span>
       <a href="https://open.spotify.com/album/0y2rInEwVww8cL6WL8bEv2?si=hFqXcQerQR-FxTr-8B9JjQ" target="_blank" rel="noopener">Spotify</a>
     </div>
+
+    <p class="room-link reveal">
+      and then she found another, and chose differently
+      <br/>
+      <a href="../my-dark-creation/">My Dark Creation<span class="arrow">→</span></a>
+    </p>
+
     <p class="artist-link reveal">
       <a href="https://linktr.ee/marklahive" target="_blank" rel="noopener">find more of mark lahive<span class="arrow">→</span></a>
     </p>
