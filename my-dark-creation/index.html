@@ -288,34 +288,6 @@
     border: 0;
   }
 
-  /* --- guitar solo break --- */
-  @keyframes flameRise {
-    0% { transform: scaleY(0.4) translateY(0); opacity: 0.5; }
-    50% { transform: scaleY(1) translateY(-4px); opacity: 0.95; }
-    100% { transform: scaleY(0.4) translateY(0); opacity: 0.5; }
-  }
-  .solo-break {
-    text-align: center;
-    margin: 2rem auto;
-    padding: 2rem 0;
-  }
-  .solo-flame {
-    width: 60px;
-    height: 80px;
-    margin: 0 auto;
-    transform-origin: bottom center;
-    animation: flameRise 1.4s ease-in-out infinite;
-  }
-  .solo-label {
-    font-family: var(--sans);
-    font-size: 0.6rem;
-    letter-spacing: 0.5em;
-    color: var(--crimson);
-    text-transform: uppercase;
-    margin-top: 1.5rem;
-    opacity: 0.6;
-  }
-
   /* --- player --- */
   .player {
     position: fixed;
@@ -721,14 +693,6 @@
     <p class="interlude reveal">She will not always walk with him. He will inherit her night.</p>
     <hr class="divider reveal" />
     <p class="lyric reveal" data-t="227.38">Now the hunters fear your name</p>
-    <div class="solo-break reveal">
-      <svg class="solo-flame" viewBox="0 0 60 80" aria-hidden="true">
-        <path d="M30 75 Q15 55 20 35 Q22 45 28 38 Q26 25 35 15 Q33 28 40 25 Q42 40 38 50 Q42 60 30 75 Z" fill="#d61f2c" opacity="0.85"/>
-        <path d="M30 70 Q22 55 26 40 Q28 48 32 42 Q30 32 36 25 Q34 35 38 32 Q40 45 36 52 Q38 58 30 70 Z" fill="#f23a48"/>
-        <path d="M30 65 Q26 55 28 48 Q30 52 32 48 Q31 40 34 35 Q33 42 36 40 Q37 50 34 54 Q36 58 30 65 Z" fill="#fff4d6" opacity="0.7"/>
-      </svg>
-      <p class="solo-label">— guitar solo —</p>
-    </div>
     <p class="lyric reveal" data-t="265.00">You stalk the world without a chain</p>
     <p class="lyric reveal" data-t="268.08">A predator of moonlit skies</p>
     <p class="lyric reveal" data-t="270.72">With ancient power in your eyes</p>
