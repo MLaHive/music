@@ -3,41 +3,40 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My Dark Creation — Mark LaHive</title>
-<meta name="description" content="My Dark Creation by Mark LaHive — a vampire's gift, an inheritance of night. Rise, Child of Darkness." />
+<title>Kiss Before the Grave — Mark LaHive</title>
+<meta name="description" content="Kiss Before the Grave by Mark LaHive — a confession in seven movements. She loved him too well to let him live." />
 
 <!-- Social link previews -->
-<meta property="og:title" content="My Dark Creation — Mark LaHive" />
-<meta property="og:description" content="A vampire's gift, an inheritance of night. Rise, Child of Darkness." />
+<meta property="og:title" content="Kiss Before the Grave — Mark LaHive" />
+<meta property="og:description" content="A confession in seven movements. She loved him too well to let him live." />
 <meta property="og:type" content="music.song" />
-<meta property="og:image" content="https://mlahive.github.io/music/covers/my-dark-creation.jpg" />
-<meta property="og:url" content="https://mlahive.github.io/music/my-dark-creation/" />
+<meta property="og:image" content="https://mlahive.github.io/music/covers/kiss-before-the-grave.jpg" />
+<meta property="og:url" content="https://mlahive.github.io/music/kiss-before-the-grave/" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="My Dark Creation — Mark LaHive" />
-<meta name="twitter:description" content="A vampire's gift, an inheritance of night." />
-<meta name="twitter:image" content="https://mlahive.github.io/music/covers/my-dark-creation.jpg" />
+<meta name="twitter:title" content="Kiss Before the Grave — Mark LaHive" />
+<meta name="twitter:description" content="A confession in seven movements." />
+<meta name="twitter:image" content="https://mlahive.github.io/music/covers/kiss-before-the-grave.jpg" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --serif: 'Cormorant Garamond', Georgia, serif;
     --display: 'Cinzel', serif;
     --sans: 'Inter', system-ui, sans-serif;
-    --bg: #050204;
-    --bg-deep: #020102;
-    --ink: #f0dcdc;
-    --ink-muted: #b89090;
-    --ink-dim: #8a5050;
-    --ink-whisper: #5a2828;
-    --crimson: #d61f2c;
-    --crimson-bright: #f23a48;
-    --crimson-deep: #6b0a14;
-    --crimson-shadow: #2e0508;
+    --bg: #0a0608;
+    --bg-deep: #050304;
+    --ink: #e8dcdc;
+    --ink-muted: #a89090;
+    --ink-dim: #8a6a6a;
+    --ink-whisper: #6b4a4a;
+    --blood: #c94a4a;
+    --blood-bright: #e86060;
+    --blood-dark: #6b2020;
+    --blood-deep: #2a0a10;
     --bone: #d4d4e0;
-    --ash: #4a0a14;
-    --iron: #1a0606;
+    --ash: #4a2020;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -52,49 +51,100 @@
     padding-bottom: 90px;
   }
 
-  /* --- backgrounds: black-dominant with sharp crimson punctuation --- */
-  .bg-night { background: radial-gradient(ellipse at 50% 30%, #0a0608 0%, var(--bg-deep) 70%); }
-  .bg-blood { background: radial-gradient(ellipse at 30% 30%, var(--crimson-shadow) 0%, var(--bg) 65%); }
-  .bg-throne { background: radial-gradient(ellipse at 50% 100%, var(--crimson-deep) 0%, var(--bg-deep) 60%); }
-  .bg-iron { background: radial-gradient(ellipse at 70% 50%, var(--iron) 0%, var(--bg-deep) 75%); }
-  .bg-eclipse { background: radial-gradient(circle at 50% 0%, #1a0610 0%, var(--bg) 50%, var(--bg-deep) 100%); }
+  .bg-red { background: radial-gradient(ellipse at 30% 20%, var(--blood-deep) 0%, var(--bg) 60%); }
+  .bg-moon { background: radial-gradient(ellipse at 70% 30%, #1a1a28 0%, var(--bg) 65%); }
+  .bg-crypt { background: radial-gradient(ellipse at 50% 80%, #1a0a0a 0%, var(--bg-deep) 70%); }
+  .bg-ash { background: radial-gradient(ellipse at 50% 50%, #181014 0%, var(--bg) 70%); }
 
-  /* --- animations --- */
-  @keyframes glowPulse {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.04); }
+  @keyframes flicker {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    45% { opacity: 0.82; transform: scale(0.98); }
+    50% { opacity: 0.95; transform: scale(1.01); }
+    55% { opacity: 0.78; transform: scale(0.97); }
   }
-  @keyframes slowDrift {
+  @keyframes slowPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.7; }
+  }
+  @keyframes drift {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
+    50% { transform: translateY(-8px); }
   }
-  @keyframes bloodPulse {
-    0%, 100% { opacity: 0.5; }
+
+  .candle { animation: flicker 4s ease-in-out infinite; transform-origin: bottom center; }
+  .moon { animation: slowPulse 6s ease-in-out infinite; }
+  .drift { animation: drift 8s ease-in-out infinite; }
+
+  /* --- heartbeat pulse (pre-chorus 1) --- */
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); opacity: 0.35; }
+    15% { transform: scale(1.12); opacity: 0.55; }
+    25% { transform: scale(1); opacity: 0.4; }
+    40% { transform: scale(1.08); opacity: 0.5; }
+    55% { transform: scale(1); opacity: 0.35; }
+  }
+  .heartbeat {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 2.5rem;
+    display: block;
+    animation: heartbeat 1.6s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  /* --- watching eyes (pre-chorus 2) --- */
+  @keyframes eyeBlink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.05); }
+  }
+  @keyframes eyeGlow {
+    0%, 100% { opacity: 0.55; }
     50% { opacity: 0.85; }
   }
-  @keyframes thunderFlash {
-    0%, 100% { opacity: 0; }
-    1%, 3% { opacity: 0.4; }
-    2% { opacity: 0.7; }
-    50% { opacity: 0; }
+  .watching {
+    width: 180px;
+    height: 40px;
+    margin: 0 auto 2.5rem;
+    display: block;
+    opacity: 0.7;
   }
-  @keyframes ringPulse {
-    0% { box-shadow: 0 0 0 0 rgba(214, 31, 44, 0.6); }
-    70% { box-shadow: 0 0 0 16px rgba(214, 31, 44, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(214, 31, 44, 0); }
+  .watching .eye {
+    animation: eyeBlink 5s ease-in-out infinite;
+    transform-origin: center;
   }
-  @keyframes cuePulse {
-    0%, 100% { opacity: 0.55; }
-    50% { opacity: 1; }
-  }
-  @keyframes coverGlow {
-    0%, 100% { box-shadow: 0 0 32px rgba(214, 31, 44, 0.22), 0 0 0 1px rgba(74, 10, 20, 0.7); }
-    50% { box-shadow: 0 0 48px rgba(214, 31, 44, 0.42), 0 0 0 1px rgba(214, 31, 44, 0.6); }
+  .watching .eye-glow {
+    animation: eyeGlow 3s ease-in-out infinite;
   }
 
-  .moon { animation: glowPulse 7s ease-in-out infinite; transform-origin: center; }
-  .drift { animation: slowDrift 9s ease-in-out infinite; }
-  .blood-pulse { animation: bloodPulse 4s ease-in-out infinite; }
+  /* --- falling petals (acoustic breakdown) --- */
+  @keyframes petalFall {
+    0% { transform: translate(0, -20px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.4; }
+    100% { transform: translate(var(--drift, 20px), 180px) rotate(var(--spin, 180deg)); opacity: 0; }
+  }
+  .petals {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    height: 180px;
+    margin: 0 auto 1.5rem;
+    pointer-events: none;
+  }
+  .petal {
+    position: absolute;
+    top: 0;
+    width: 10px;
+    height: 14px;
+    background: var(--blood-dark);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: petalFall 6s linear infinite;
+  }
+  .petal.p1 { left: 20%; --drift: 15px; --spin: 200deg; animation-delay: 0s; }
+  .petal.p2 { left: 45%; --drift: -25px; --spin: -160deg; animation-delay: 1.5s; }
+  .petal.p3 { left: 70%; --drift: 30px; --spin: 240deg; animation-delay: 3s; }
+  .petal.p4 { left: 35%; --drift: -10px; --spin: -90deg; animation-delay: 4.5s; }
+  .petal.p5 { left: 60%; --drift: 20px; --spin: 140deg; animation-delay: 2.2s; }
 
   .reveal {
     opacity: 0;
@@ -109,7 +159,6 @@
   section { padding: 6rem 2rem; position: relative; }
   .container { max-width: 640px; margin: 0 auto; }
 
-  /* --- HERO --- */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -118,43 +167,23 @@
     align-items: center;
     text-align: center;
     padding: 2rem;
-    position: relative;
-    overflow: hidden;
   }
-  .hero-cover {
-    width: 240px;
-    height: 240px;
-    margin: 0 auto 2.5rem;
-    display: block;
-    border-radius: 2px;
-    object-fit: cover;
-    animation: coverGlow 6s ease-in-out infinite;
-    transition: transform 0.6s ease;
-    position: relative;
-    z-index: 2;
-  }
-  .hero-cover:hover { transform: scale(1.02); }
   .hero h1 {
     font-family: var(--display);
-    font-size: clamp(2.6rem, 8vw, 5rem);
-    font-weight: 600;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 400;
     color: var(--ink);
-    margin: 0 0 1rem;
-    letter-spacing: 0.06em;
+    margin: 2rem 0 1rem;
+    letter-spacing: 0.04em;
     line-height: 1.1;
-    text-shadow: 0 0 30px rgba(214, 31, 44, 0.3);
-    position: relative;
-    z-index: 2;
   }
   .hero .subtitle {
     font-family: var(--serif);
     font-style: italic;
-    font-size: 1.15rem;
-    color: var(--ink-muted);
-    margin-bottom: 2rem;
-    max-width: 460px;
-    position: relative;
-    z-index: 2;
+    font-size: 1.1rem;
+    color: var(--ink-dim);
+    margin-bottom: 3rem;
+    max-width: 420px;
   }
   .hero .scroll-cue {
     font-family: var(--sans);
@@ -163,11 +192,19 @@
     color: var(--ink-whisper);
     text-transform: uppercase;
     margin-top: 4rem;
-    position: relative;
-    z-index: 2;
   }
 
-  /* Onboarding cues */
+  /* --- onboarding cues --- */
+  @keyframes cuePulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+  @keyframes ringPulse {
+    0% { box-shadow: 0 0 0 0 rgba(201, 74, 74, 0.6); }
+    70% { box-shadow: 0 0 0 14px rgba(201, 74, 74, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(201, 74, 74, 0); }
+  }
+
   .hero .play-cue {
     display: inline-flex;
     align-items: center;
@@ -175,26 +212,53 @@
     font-family: var(--sans);
     font-size: 0.7rem;
     letter-spacing: 0.35em;
-    color: var(--crimson);
+    color: var(--blood);
     text-transform: uppercase;
     margin-top: 3rem;
     animation: cuePulse 2.4s ease-in-out infinite;
     transition: opacity 1.2s ease-out;
-    position: relative;
-    z-index: 2;
   }
-  .hero .play-cue svg { width: 10px; height: 10px; fill: currentColor; }
+  .hero .play-cue svg {
+    width: 10px;
+    height: 10px;
+    fill: currentColor;
+  }
   .hero .play-cue.dismissed {
     opacity: 0 !important;
     pointer-events: none;
   }
 
-  /* --- LYRICS --- */
+  .play-btn.pulse {
+    animation: ringPulse 2s ease-out infinite;
+  }
+
+  /* --- hero cover artwork --- */
+  @keyframes coverGlow {
+    0%, 100% { box-shadow: 0 0 24px rgba(201, 74, 74, 0.18), 0 0 0 1px rgba(74, 32, 32, 0.6); }
+    50% { box-shadow: 0 0 36px rgba(201, 74, 74, 0.32), 0 0 0 1px rgba(107, 32, 32, 0.8); }
+  }
+  .hero-cover {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 2.5rem;
+    display: block;
+    border-radius: 2px;
+    object-fit: cover;
+    animation: coverGlow 6s ease-in-out infinite;
+    transition: transform 0.6s ease;
+  }
+  .hero-cover:hover {
+    transform: scale(1.02);
+  }
+  @media (max-width: 600px) {
+    .hero-cover { width: 180px; height: 180px; }
+  }
+
   .lyric {
-    font-size: 1.3rem;
-    line-height: 1.85;
-    color: #c4a8a8;
-    margin: 0 0 0.4rem;
+    font-size: 1.25rem;
+    line-height: 1.9;
+    color: #c4b0b0;
+    margin: 0 0 0.3rem;
     font-family: var(--serif);
     font-style: italic;
     letter-spacing: 0.01em;
@@ -202,40 +266,35 @@
     transition: all 0.4s ease;
     padding: 0.15rem 0;
   }
-  .lyric.crimson {
-    color: var(--crimson);
+  .lyric.accent {
+    color: var(--blood);
     font-weight: 500;
     font-style: normal;
-    letter-spacing: 0.02em;
-    font-size: 1.4rem;
+    letter-spacing: 0.015em;
   }
-  .lyric.declaration {
-    color: var(--ink);
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 500;
-    letter-spacing: 0.03em;
+  .lyric.whisper {
+    color: var(--ink-muted);
+    font-size: 1.35rem;
   }
   .lyric.final {
-    color: var(--crimson-bright);
-    font-size: 1.6rem;
+    color: var(--blood);
+    font-size: 1.4rem;
     font-style: italic;
-    text-align: center;
   }
 
-  /* Sync states */
   body.sync-active .lyric:not(.active) {
     opacity: 0.28;
   }
   body.sync-active .lyric.active {
-    color: var(--crimson-bright) !important;
+    color: var(--blood-bright) !important;
     opacity: 1;
-    text-shadow: 0 0 22px rgba(242, 58, 72, 0.35);
+    text-shadow: 0 0 20px rgba(233, 96, 96, 0.25);
     transform: translateX(4px);
   }
-  .lyric:hover { color: var(--crimson); }
+  .lyric:hover { color: var(--blood); }
 
-  /* Reveal-on-sung */
+  /* --- reveal-on-sung mode --- */
+  /* In reveal mode, lines are hidden until they've been sung */
   body.reveal-mode .lyric[data-t]:not(.revealed) {
     opacity: 0;
     max-height: 0;
@@ -247,19 +306,24 @@
     transition: opacity 1s ease-out, transform 1s ease-out, max-height 0.5s ease-out 0.3s, margin 0.5s ease-out 0.3s, padding 0.5s ease-out 0.3s, line-height 0.5s ease-out 0.3s;
     pointer-events: none;
   }
-  body.reveal-mode .lyric.verse-gap:not(.revealed) { margin-top: 0; }
+  /* verse-gap margin also collapses when line is hidden */
+  body.reveal-mode .lyric.verse-gap:not(.revealed) {
+    margin-top: 0;
+  }
+  /* Once revealed, the line fades in with proper spacing */
   body.reveal-mode .lyric[data-t].revealed {
     opacity: 1;
     max-height: 5em;
-    line-height: 1.85;
+    line-height: 1.9;
     transform: translateY(0);
     pointer-events: auto;
     transition: opacity 1.2s ease-out, transform 1.2s ease-out;
   }
+  /* When revealed AND currently active, the sync highlight still applies */
   body.reveal-mode.sync-active .lyric.revealed.active {
-    color: var(--crimson-bright) !important;
+    color: var(--blood-bright) !important;
     opacity: 1;
-    text-shadow: 0 0 22px rgba(242, 58, 72, 0.35);
+    text-shadow: 0 0 20px rgba(233, 96, 96, 0.25);
     transform: translateX(4px);
   }
   body.reveal-mode.sync-active .lyric.revealed:not(.active) {
@@ -270,7 +334,7 @@
 
   .interlude {
     font-family: var(--serif);
-    font-size: 1.05rem;
+    font-size: 1rem;
     line-height: 1.8;
     color: var(--ink-dim);
     text-align: center;
@@ -287,41 +351,12 @@
     border: 0;
   }
 
-  /* --- guitar solo break --- */
-  @keyframes flameRise {
-    0% { transform: scaleY(0.4) translateY(0); opacity: 0.5; }
-    50% { transform: scaleY(1) translateY(-4px); opacity: 0.95; }
-    100% { transform: scaleY(0.4) translateY(0); opacity: 0.5; }
-  }
-  .solo-break {
-    text-align: center;
-    margin: 2rem auto;
-    padding: 2rem 0;
-  }
-  .solo-flame {
-    width: 60px;
-    height: 80px;
-    margin: 0 auto;
-    transform-origin: bottom center;
-    animation: flameRise 1.4s ease-in-out infinite;
-  }
-  .solo-label {
-    font-family: var(--sans);
-    font-size: 0.6rem;
-    letter-spacing: 0.5em;
-    color: var(--crimson);
-    text-transform: uppercase;
-    margin-top: 1.5rem;
-    opacity: 0.6;
-  }
-
-  /* --- player --- */
   .player {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(2, 1, 2, 0.94);
+    background: rgba(5, 3, 4, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid var(--ash);
@@ -359,8 +394,8 @@
     height: 44px;
     border-radius: 50%;
     background: transparent;
-    border: 1px solid var(--crimson-deep);
-    color: var(--crimson);
+    border: 1px solid var(--blood-dark);
+    color: var(--blood);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -369,12 +404,11 @@
     flex-shrink: 0;
   }
   .play-btn:hover {
-    background: var(--crimson-deep);
+    background: var(--blood-dark);
     color: #f0e4e4;
-    border-color: var(--crimson);
+    border-color: var(--blood);
   }
   .play-btn svg { width: 14px; height: 14px; }
-  .play-btn.pulse { animation: ringPulse 2s ease-out infinite; }
 
   .progress-wrap {
     flex: 1;
@@ -403,7 +437,7 @@
     position: absolute;
     top: 0; left: 0;
     height: 100%;
-    background: var(--crimson);
+    background: var(--blood);
     border-radius: 1px;
     width: 0%;
     transition: width 0.1s linear;
@@ -414,7 +448,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--crimson);
+    background: var(--blood);
     transform: translate(-50%, -50%);
     left: 0%;
     opacity: 0;
@@ -423,7 +457,11 @@
   }
   .progress:hover .progress-thumb { opacity: 1; }
 
-  .toggle-group { display: flex; gap: 4px; flex-shrink: 0; }
+  .toggle-group {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+  }
   .toggle {
     background: transparent;
     border: 1px solid var(--ash);
@@ -438,11 +476,11 @@
     border-radius: 2px;
     white-space: nowrap;
   }
-  .toggle:hover { color: var(--crimson); border-color: var(--crimson-deep); }
+  .toggle:hover { color: var(--blood); border-color: var(--blood-dark); }
   .toggle.on {
-    color: var(--crimson);
-    border-color: var(--crimson-deep);
-    background: rgba(214, 31, 44, 0.08);
+    color: var(--blood);
+    border-color: var(--blood-dark);
+    background: rgba(201, 74, 74, 0.08);
   }
 
   .upload-hint {
@@ -457,9 +495,26 @@
     transition: all 0.2s;
     flex-shrink: 0;
   }
-  .upload-hint:hover { color: var(--crimson); border-color: var(--crimson-deep); }
+  .upload-hint:hover { color: var(--blood); border-color: var(--blood-dark); }
 
-  /* --- streaming links --- */
+  .drip-layer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 140px;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  .end-section {
+    text-align: center;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* --- streaming links at the end --- */
   .streaming {
     margin-top: 2.5rem;
     font-family: var(--sans);
@@ -467,7 +522,6 @@
     letter-spacing: 0.3em;
     color: var(--ink-whisper);
     text-transform: uppercase;
-    text-align: center;
   }
   .streaming .label {
     display: block;
@@ -480,24 +534,28 @@
     color: var(--ink-dim);
   }
   .streaming a {
-    color: var(--crimson);
+    color: var(--blood);
     text-decoration: none;
     padding: 0 0.75rem;
     transition: color 0.3s ease, letter-spacing 0.3s ease;
   }
   .streaming a:hover {
-    color: var(--crimson-bright);
+    color: var(--blood-bright);
     letter-spacing: 0.35em;
   }
-  .streaming .dot { color: var(--ash); padding: 0; }
+  .streaming .dot {
+    color: var(--ash);
+    padding: 0;
+  }
 
+  /* --- secondary artist link, after streaming --- */
   .artist-link {
     margin-top: 2rem;
     font-family: var(--serif);
     font-style: italic;
     font-size: 0.9rem;
     color: var(--ink-whisper);
-    text-align: center;
+    letter-spacing: 0.02em;
   }
   .artist-link a {
     color: var(--ink-dim);
@@ -507,8 +565,8 @@
     padding-bottom: 2px;
   }
   .artist-link a:hover {
-    color: var(--crimson);
-    border-bottom-color: var(--crimson-deep);
+    color: var(--blood);
+    border-bottom-color: var(--blood-dark);
   }
   .artist-link .arrow {
     display: inline-block;
@@ -519,23 +577,48 @@
     transform: translateX(3px);
   }
 
-  .end-section {
+  /* --- cross-link between listening rooms --- */
+  .room-link {
+    margin-top: 3rem;
     text-align: center;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-dim);
+    line-height: 1.7;
+  }
+  .room-link a {
+    display: inline-block;
+    color: var(--blood);
+    text-decoration: none;
+    font-style: normal;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.4s ease, border-color 0.4s ease, letter-spacing 0.4s ease;
+  }
+  .room-link a:hover {
+    color: #e86060;
+    border-bottom-color: var(--blood-dark);
+    letter-spacing: 0.1em;
+  }
+  .room-link .arrow {
+    display: inline-block;
+    margin-left: 6px;
+    transition: transform 0.3s ease;
+  }
+  .room-link a:hover .arrow {
+    transform: translateX(4px);
   }
 
-  /* --- mobile --- */
   @media (max-width: 700px) {
     section { padding: 4rem 1.5rem; }
-    .lyric { font-size: 1.15rem; }
-    .lyric.crimson { font-size: 1.25rem; }
-    .lyric.declaration { font-size: 1.3rem; }
-    .lyric.final { font-size: 1.4rem; }
-    .hero-cover { width: 200px; height: 200px; }
+    .lyric { font-size: 1.1rem; }
+    .lyric.whisper, .lyric.final { font-size: 1.2rem; }
 
+    /* Two-row mobile player: row 1 = controls + progress, row 2 = toggles */
     .player {
       padding: 0.75rem 1rem 0.6rem;
       gap: 0.6rem;
@@ -545,8 +628,14 @@
     .player .song-info { display: none; }
     .play-btn { width: 38px; height: 38px; }
     .play-btn svg { width: 12px; height: 12px; }
-    .progress-wrap { flex: 1 1 auto; min-width: 0; order: 1; }
+    .progress-wrap {
+      flex: 1 1 auto;
+      min-width: 0;
+      order: 1;
+    }
     .time { font-size: 0.65rem; min-width: 30px; }
+
+    /* Toggles drop to their own full-width row below */
     .toggle-group {
       flex: 1 0 100%;
       order: 2;
@@ -570,11 +659,10 @@
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero bg-eclipse">
-  <img src="https://mlahive.github.io/music/covers/my-dark-creation.jpg" alt="My Dark Creation album cover" class="hero-cover" />
-  <h1>My Dark<br/>Creation</h1>
-  <p class="subtitle">A vampire's gift. An inheritance of night.</p>
+<section class="hero bg-red">
+  <img src="https://mlahive.github.io/music/covers/kiss-before-the-grave.jpg" alt="Kiss Before The Grave album cover" class="hero-cover" />
+  <h1>Kiss Before<br/>the Grave</h1>
+  <p class="subtitle">She loved him too well to let him live.</p>
   <p class="play-cue" id="playCue">
     <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 1 L1 9 L9 5 Z"/></svg>
     press play to begin
@@ -582,171 +670,203 @@
   <p class="scroll-cue">scroll slowly</p>
 </section>
 
-<!-- VERSE 1 — finding the dying mortal -->
-<section class="bg-night">
+<section class="bg-red">
   <div class="container">
-    <p class="interlude reveal">A cold moon. Silent stones. She walks where the dead are restless and the living do not come. Then she hears it — a heartbeat, fading. A life so close to over.</p>
+    <p class="interlude reveal">She sits at the edge of his bed. The candles have burned low. He is still warm, still breathing, still hers — for now.</p>
     <hr class="divider reveal" />
-    <p class="lyric reveal" data-t="14.90">Cold moon rising over silent graves</p>
-    <p class="lyric reveal" data-t="18.66">Shadows whisper ancient names</p>
-    <p class="lyric reveal" data-t="21.32">I walked alone where the lost ones tread</p>
-    <p class="lyric reveal" data-t="24.06">Where the living fear and the dead are fed</p>
-    <p class="lyric reveal verse-gap" data-t="28.70">A pulse of life I heard your cry</p>
-    <p class="lyric reveal" data-t="34.78">A fragile spark beneath black sky</p>
+    <p class="lyric reveal" data-t="41.40">I watched you in the candle rain</p>
+    <p class="lyric reveal" data-t="44.74">Warm blood beneath your fragile skin</p>
+    <p class="lyric reveal" data-t="47.94">You smiled as if I could be saved</p>
+    <p class="lyric reveal" data-t="51.34">As if the beast would not begin</p>
+    <p class="lyric reveal verse-gap" data-t="54.42">Your hands were light upon my face</p>
+    <p class="lyric reveal" data-t="57.66">You called me something close to pure</p>
+    <p class="lyric reveal" data-t="60.96">But I have worn too many graves</p>
+    <p class="lyric reveal" data-t="64.14">To think that love could be the cure</p>
   </div>
 </section>
 
-<!-- VERSE 1 CONT — the giving -->
-<section class="bg-blood">
+<section class="bg-crypt">
   <div class="container">
-    <p class="interlude reveal">She has done this before. She has refused, she has mourned, she has buried. Tonight, she does not refuse.</p>
-    <hr class="divider reveal" />
-    <p class="lyric reveal" data-t="51.28">You were trembling in the pale moonlight</p>
-    <p class="lyric reveal" data-t="54.44">Broken wings in the endless night</p>
-    <p class="lyric reveal" data-t="57.30">Your mortal breath so weak, so thin</p>
-    <p class="lyric reveal" data-t="60.02">A fading flame I pulled within</p>
-    <p class="lyric reveal verse-gap" data-t="63.40">Your blood ran warm beneath my hand</p>
-    <p class="lyric reveal" data-t="66.50">A dying soul I could not stand</p>
-    <p class="lyric reveal" data-t="68.94">So I gave the curse that lives in me</p>
-    <p class="lyric reveal" data-t="72.02">An immortal dark eternity</p>
-  </div>
-</section>
-
-<!-- PRE-CHORUS — the kiss of darkness -->
-<section class="bg-iron">
-  <div class="container">
-    <p class="lyric reveal" data-t="75.72">One drop of night upon your lips</p>
-    <p class="lyric reveal" data-t="78.78">One kiss to seal the eclipse</p>
-    <p class="lyric reveal" data-t="81.06">Your heartbeat slowed then fell apart</p>
-    <p class="lyric reveal" data-t="84.10">But darkness woke inside your heart</p>
-  </div>
-</section>
-
-<!-- CHORUS 1 — the rising -->
-<section class="bg-throne">
-  <div class="container">
-    <p class="interlude reveal">The mortal opens his eyes. They are no longer his.</p>
-    <hr class="divider reveal" />
-    <p class="lyric crimson reveal" data-t="88.24">Now you rise, my Child of Darkness</p>
-    <p class="lyric crimson reveal" data-t="94.30">Born beneath the crimson sky</p>
-    <p class="lyric crimson reveal" data-t="100.20">Drink the night and claim your hunger</p>
-    <p class="lyric crimson reveal" data-t="106.18">Spread your shadow, learn to fly</p>
-    <p class="lyric crimson reveal verse-gap" data-t="112.40">Through the blood and through the silence</p>
-    <p class="lyric crimson reveal" data-t="118.50">Through eternity we roam</p>
-    <p class="lyric crimson reveal" data-t="124.44">You are mine, my dark creation</p>
-    <p class="lyric crimson reveal" data-t="130.66">In the night you've found your throne</p>
-  </div>
-</section>
-
-<!-- VERSE 2 — the becoming -->
-<section class="bg-night">
-  <div class="container">
-    <p class="interlude reveal">She watches him learn what he is. The fear in him burns away. The hunter takes its place.</p>
-    <hr class="divider reveal" />
-    <p class="lyric reveal" data-t="137.64">Your eyes now burn with silver flame</p>
-    <p class="lyric reveal" data-t="140.64">The world will never be the same</p>
-    <p class="lyric reveal" data-t="143.32">The warmth of life now turns to frost</p>
-    <p class="lyric reveal" data-t="146.36">A mortal soul forever lost</p>
-    <p class="lyric reveal verse-gap" data-t="149.66">I feel your power growing strong</p>
-    <p class="lyric reveal" data-t="152.78">You hear the ancient hunter's song</p>
-    <p class="lyric reveal" data-t="155.46">A thousand years inside your veins</p>
-    <p class="lyric reveal" data-t="158.40">The gift of night, the endless reign</p>
-  </div>
-</section>
-
-<!-- PRE-CHORUS 2 -->
-<section class="bg-iron">
-  <div class="container">
-    <p class="lyric reveal" data-t="162.02">No sunrise now can steal your breath</p>
-    <p class="lyric reveal" data-t="165.02">You've crossed the sacred gate of death</p>
-    <p class="lyric reveal" data-t="168.02">The beast within begins to rise</p>
-    <p class="lyric reveal" data-t="171.28">Reflected in immortal eyes</p>
-  </div>
-</section>
-
-<!-- CHORUS 2 -->
-<section class="bg-throne">
-  <div class="container">
-    <p class="lyric crimson reveal" data-t="176.02">Now you rise, my Child of Darkness</p>
-    <p class="lyric crimson reveal" data-t="182.00">Born beneath the crimson sky</p>
-    <p class="lyric crimson reveal" data-t="187.86">Drink the night and claim your hunger</p>
-    <p class="lyric crimson reveal" data-t="193.92">Spread your shadow, learn to fly</p>
-    <p class="lyric crimson reveal verse-gap" data-t="199.96">Through the blood and through the silence</p>
-    <p class="lyric crimson reveal" data-t="206.10">Through eternity we roam</p>
-    <p class="lyric crimson reveal" data-t="212.10">You are mine, my dark creation</p>
-    <p class="lyric crimson reveal" data-t="218.26">In the night you've found your throne</p>
-  </div>
-</section>
-
-<!-- VERSE 3 — the inheritance, broken by the solo -->
-<section class="bg-blood">
-  <div class="container">
-    <p class="interlude reveal">She will not always walk with him. He will inherit her night.</p>
-    <hr class="divider reveal" />
-    <p class="lyric reveal" data-t="227.38">Now the hunters fear your name</p>
-    <div class="solo-break reveal">
-      <svg class="solo-flame" viewBox="0 0 60 80" aria-hidden="true">
-        <path d="M30 75 Q15 55 20 35 Q22 45 28 38 Q26 25 35 15 Q33 28 40 25 Q42 40 38 50 Q42 60 30 75 Z" fill="#d61f2c" opacity="0.85"/>
-        <path d="M30 70 Q22 55 26 40 Q28 48 32 42 Q30 32 36 25 Q34 35 38 32 Q40 45 36 52 Q38 58 30 70 Z" fill="#f23a48"/>
-        <path d="M30 65 Q26 55 28 48 Q30 52 32 48 Q31 40 34 35 Q33 42 36 40 Q37 50 34 54 Q36 58 30 65 Z" fill="#fff4d6" opacity="0.7"/>
-      </svg>
-      <p class="solo-label">— guitar solo —</p>
-    </div>
-    <p class="lyric reveal" data-t="265.00">You stalk the world without a chain</p>
-    <p class="lyric reveal" data-t="268.08">A predator of moonlit skies</p>
-    <p class="lyric reveal" data-t="270.72">With ancient power in your eyes</p>
-    <p class="lyric reveal verse-gap" data-t="274.04">My legacy now walks the earth</p>
-    <p class="lyric reveal" data-t="277.08">A darker form of second birth</p>
-    <p class="lyric reveal" data-t="279.96">From dying breath to endless reign</p>
-    <p class="lyric reveal" data-t="282.68">My child will rule the night again</p>
-  </div>
-</section>
-
-<!-- FINAL CHORUS — the coronation -->
-<section class="bg-throne">
-  <div class="container">
-    <p class="interlude reveal">Not a confession. Not a mourning. A coronation.</p>
-    <hr class="divider reveal" />
-    <p class="lyric declaration reveal" data-t="287.38">Rise and Reign</p>
-    <p class="lyric declaration reveal" data-t="287.79">Rise and reign, my Child of Darkness</p>
-    <p class="lyric crimson reveal verse-gap" data-t="312.98">Let the crimson rivers flow</p>
-    <p class="lyric crimson reveal" data-t="322.24">Break the chains of mortal weakness</p>
-    <p class="lyric crimson reveal" data-t="329.44">Feel the ancient power grow</p>
-    <p class="lyric crimson reveal verse-gap" data-t="335.34">Through the blood and through the silence</p>
-    <p class="lyric crimson reveal" data-t="341.40">Through eternity we roam</p>
-    <p class="lyric crimson reveal" data-t="347.30">You are mine, my dark creation</p>
-  </div>
-</section>
-
-<!-- OUTRO — the gift bestowed -->
-<section class="bg-eclipse end-section">
-  <div class="container">
-    <p class="lyric final reveal" data-t="353.44">And the night</p>
-    <p class="lyric final reveal verse-gap" data-t="358.78">Is now your home</p>
-
-    <hr class="divider reveal" style="margin-top: 5rem;" />
-
-    <!-- Decorative crown / throne mark -->
-    <svg width="80" height="50" viewBox="0 0 80 50" style="margin: 2rem auto 1rem; display: block; opacity: 0.5;" aria-hidden="true">
-      <path d="M10 40 L10 25 L20 30 L30 18 L40 28 L50 18 L60 30 L70 25 L70 40 Z" fill="none" stroke="#d61f2c" stroke-width="1.5"/>
-      <circle cx="20" cy="30" r="2" fill="#d61f2c"/>
-      <circle cx="40" cy="28" r="2.5" fill="#f23a48"/>
-      <circle cx="60" cy="30" r="2" fill="#d61f2c"/>
+    <svg class="heartbeat" viewBox="0 0 60 60" aria-hidden="true">
+      <circle cx="30" cy="30" r="22" fill="none" stroke="#8a0a0a" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="30" cy="30" r="14" fill="#6b1a1a" opacity="0.5"/>
+      <circle cx="30" cy="30" r="7" fill="#c94a4a"/>
     </svg>
+    <p class="lyric reveal" data-t="67.44">Every night I hear your heartbeat</p>
+    <p class="lyric reveal" data-t="70.62">Like a hymn beneath the floor</p>
+    <p class="lyric reveal" data-t="73.86">And the hunger claws inside me</p>
+    <p class="lyric reveal" data-t="76.72">Begging me for more</p>
+  </div>
+</section>
 
-    <div class="streaming reveal">
-      <span class="label">Take the gift</span>
-      <a href="https://music.apple.com/us/album/my-dark-creation/" target="_blank" rel="noopener">Apple Music</a>
-      <span class="dot">·</span>
-      <a href="https://open.spotify.com/" target="_blank" rel="noopener">Spotify</a>
+<section class="bg-red">
+  <svg class="drip-layer" viewBox="0 0 640 140" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M100 0 L100 60 Q100 75 105 85 L105 100" stroke="#8a0a0a" stroke-width="1.5" fill="none"/>
+    <circle cx="105" cy="105" r="3" fill="#8a0a0a"/>
+    <path d="M320 0 L320 90 Q320 105 315 115" stroke="#8a0a0a" stroke-width="1.5" fill="none"/>
+    <circle cx="315" cy="120" r="4" fill="#8a0a0a"/>
+    <path d="M540 0 L540 40" stroke="#8a0a0a" stroke-width="1.5" fill="none"/>
+    <circle cx="540" cy="45" r="2" fill="#8a0a0a"/>
+  </svg>
+  <div class="container">
+    <p class="lyric accent reveal" data-t="79.54">So kiss me before the grave</p>
+    <p class="lyric accent reveal" data-t="82.82">Before my mouth becomes your end</p>
+    <p class="lyric accent reveal" data-t="86.04">Before these fangs choose hunger</p>
+    <p class="lyric accent reveal" data-t="88.96">Over lover, over friend</p>
+    <p class="lyric accent reveal verse-gap" data-t="92.10">I would rather break your heart</p>
+    <p class="lyric accent reveal" data-t="94.96">Than drink the life behind your eyes</p>
+    <p class="lyric accent reveal" data-t="98.62">If I cannot keep you human</p>
+    <p class="lyric accent reveal" data-t="101.74">Then tonight, my love, you die</p>
+  </div>
+</section>
+
+<section class="bg-moon">
+  <div class="container">
+    <svg class="moon drift" width="100" height="100" viewBox="0 0 100 100" style="display:block; margin: 0 auto 2rem;" aria-hidden="true">
+      <circle cx="50" cy="50" r="34" fill="#d4d4e0" opacity="0.9"/>
+      <circle cx="40" cy="42" r="5" fill="#a8a8b8" opacity="0.4"/>
+      <circle cx="60" cy="54" r="4" fill="#a8a8b8" opacity="0.4"/>
+      <circle cx="47" cy="62" r="2.5" fill="#a8a8b8" opacity="0.4"/>
+    </svg>
+    <p class="interlude reveal">He dreams of a future. She has no future, only the long cold ache of never ending.</p>
+    <hr class="divider reveal" />
+    <p class="lyric reveal" data-t="110.48">You dream of dawn and open fields</p>
+    <p class="lyric reveal" data-t="122.54">I dream of crypts and poisoned snow</p>
+    <p class="lyric reveal" data-t="125.72">You speak of years and growing old</p>
+    <p class="lyric reveal" data-t="128.96">There is no age in what I know</p>
+    <p class="lyric reveal verse-gap" data-t="132.14">Your neck beneath the silver moon</p>
+    <p class="lyric reveal" data-t="135.82">Has become my sweetest sin</p>
+    <p class="lyric reveal" data-t="138.70">And every moment that I stay</p>
+    <p class="lyric reveal" data-t="141.88">Brings death a little closer in</p>
+  </div>
+</section>
+
+<section class="bg-crypt">
+  <div class="container">
+    <svg class="watching" viewBox="0 0 180 40" aria-hidden="true">
+      <g class="eye-glow">
+        <ellipse cx="65" cy="20" rx="9" ry="4.5" fill="#6b1010" opacity="0.4"/>
+        <ellipse cx="115" cy="20" rx="9" ry="4.5" fill="#6b1010" opacity="0.4"/>
+      </g>
+      <g class="eye">
+        <ellipse cx="65" cy="20" rx="4" ry="2" fill="#c94a4a"/>
+        <ellipse cx="115" cy="20" rx="4" ry="2" fill="#c94a4a"/>
+      </g>
+    </svg>
+    <p class="lyric reveal" data-t="145.20">I can feel the beast awaken</p>
+    <p class="lyric reveal" data-t="147.74">With every breath you give to me</p>
+    <p class="lyric reveal" data-t="151.58">And I know the price of wanting</p>
+    <p class="lyric reveal" data-t="154.44">What can never be</p>
+  </div>
+</section>
+
+<section class="bg-red">
+  <div class="container">
+    <p class="lyric accent reveal" data-t="157.26">So kiss me before the grave</p>
+    <p class="lyric accent reveal" data-t="160.52">Before my mouth becomes your end</p>
+    <p class="lyric accent reveal" data-t="163.74">Before these fangs choose hunger</p>
+    <p class="lyric accent reveal" data-t="166.64">Over lover, over friend</p>
+    <p class="lyric accent reveal verse-gap" data-t="169.80">I would rather break your heart</p>
+    <p class="lyric accent reveal" data-t="172.60">Than drink the life behind your eyes</p>
+    <p class="lyric accent reveal" data-t="176.30">If I cannot keep you human</p>
+    <p class="lyric accent reveal" data-t="179.46">Then tonight, my love, you die</p>
+  </div>
+</section>
+
+<section class="bg-crypt">
+  <div class="container">
+    <p class="interlude reveal">The candles have gone out. The prayer she cannot speak is his name.</p>
+    <hr class="divider reveal" />
+    <p class="lyric reveal" data-t="210.08">Your name still burns on lifeless lips</p>
+    <p class="lyric reveal" data-t="212.92">A prayer I do not dare repeat</p>
+    <p class="lyric reveal" data-t="216.14">The moon bears witness to my grief</p>
+    <p class="lyric reveal" data-t="219.42">As shadows gather at your feet</p>
+    <p class="lyric reveal verse-gap" data-t="222.64">I trace the veins beneath your skin</p>
+    <p class="lyric reveal" data-t="225.74">Like scripture I was born to stain</p>
+    <p class="lyric reveal" data-t="228.92">And in the silence of this love</p>
+    <p class="lyric reveal" data-t="232.20">I choose your death above your pain</p>
+  </div>
+</section>
+
+<section class="bg-ash">
+  <div class="container">
+    <p class="lyric reveal" data-t="235.74">Do not call this mercy</p>
+    <p class="lyric reveal" data-t="239.10">Do not call me kind</p>
+    <p class="lyric reveal" data-t="241.34">I am carving out the only mercy</p>
+    <p class="lyric reveal" data-t="245.42">My cursed hands can find</p>
+    <p class="lyric reveal verse-gap" data-t="249.26">Better by my sorrow</p>
+    <p class="lyric reveal" data-t="252.14">Than by my thirst undone</p>
+    <p class="lyric reveal" data-t="255.12">Better in my arms as death</p>
+    <p class="lyric reveal" data-t="258.08">Than living as the damned become</p>
+  </div>
+</section>
+
+<section class="bg-ash" style="border-top: 1px solid #2a1a1a; border-bottom: 1px solid #2a1a1a;">
+  <div class="container">
+    <p class="interlude reveal" style="color: var(--ink-muted);">There is nothing left to say. Only the breath between them, and the grief she cannot speak.</p>
+    <div class="petals" aria-hidden="true">
+      <span class="petal p1"></span>
+      <span class="petal p2"></span>
+      <span class="petal p3"></span>
+      <span class="petal p4"></span>
+      <span class="petal p5"></span>
     </div>
+    <p class="lyric whisper reveal" data-t="274.70">Lay your head against me now</p>
+    <p class="lyric whisper reveal" data-t="277.98">Hear the monster weep</p>
+    <p class="lyric whisper reveal" data-t="280.48">I was never made for heaven</p>
+    <p class="lyric whisper reveal" data-t="283.74">I was only made to reap</p>
+    <p class="lyric whisper reveal verse-gap" data-t="286.80">Ruins where the roses bloom</p>
+    <p class="lyric whisper reveal" data-t="289.98">Ashes where the angels hide</p>
+    <p class="lyric whisper reveal" data-t="293.16">And the only thing I ever loved</p>
+    <p class="lyric final reveal" data-t="297.76">I must destroy tonight</p>
+  </div>
+</section>
+
+<section class="bg-red">
+  <div class="container">
+    <p class="lyric accent reveal" data-t="299.92">So kiss me before the grave</p>
+    <p class="lyric accent reveal" data-t="303.20">Before eternity turns cruel</p>
+    <p class="lyric accent reveal" data-t="306.40">Before I drag your soul with mine</p>
+    <p class="lyric accent reveal" data-t="309.56">Into this endless tomb</p>
+    <p class="lyric accent reveal verse-gap" data-t="312.56">I would rather stain my hands</p>
+    <p class="lyric accent reveal" data-t="315.22">Than watch your innocence decay</p>
+    <p class="lyric accent reveal" data-t="318.80">If I must become your ending</p>
+    <p class="lyric accent reveal" data-t="322.38">Then love will kill you clean today</p>
+  </div>
+</section>
+
+<section class="bg-crypt end-section">
+  <div class="container">
+    <p class="lyric whisper reveal" data-t="326.82">One last breath</p>
+    <p class="lyric whisper reveal" data-t="328.40">One last prayer</p>
+    <p class="lyric whisper reveal" data-t="330.00">One last taste of mortal air</p>
+    <p class="lyric final reveal verse-gap" data-t="332.88">I loved you more than hunger</p>
+    <p class="lyric final reveal" data-t="336.36">That is why I leave you dead</p>
+    <hr class="divider reveal" style="margin-top: 5rem;" />
+    <svg width="36" height="60" viewBox="0 0 36 60" style="margin: 2rem auto 1rem; display: block; opacity: 0.45;" aria-hidden="true">
+      <rect x="14" y="18" width="8" height="34" fill="#5a4838"/>
+      <line x1="18" y1="18" x2="18" y2="10" stroke="#2a1818" stroke-width="1.2"/>
+      <circle cx="18" cy="8" r="1.8" fill="#3a2818" opacity="0.6"/>
+    </svg>
+    <div class="streaming reveal">
+      <span class="label">Take her with you</span>
+      <a href="https://music.apple.com/us/album/kiss-before-the-grave-single/1892946253" target="_blank" rel="noopener">Apple Music</a>
+      <span class="dot">·</span>
+      <a href="https://open.spotify.com/album/0y2rInEwVww8cL6WL8bEv2?si=hFqXcQerQR-FxTr-8B9JjQ" target="_blank" rel="noopener">Spotify</a>
+    </div>
+
+    <p class="room-link reveal">
+      and then she found another, and chose differently
+      <br/>
+      <a href="../my-dark-creation/">My Dark Creation<span class="arrow">→</span></a>
+    </p>
+
     <p class="artist-link reveal">
       <a href="https://linktr.ee/marklahive" target="_blank" rel="noopener">find more of mark lahive<span class="arrow">→</span></a>
     </p>
   </div>
 </section>
 
-<!-- PLAYER -->
 <div class="player" role="region" aria-label="Audio player">
   <button class="play-btn" id="playBtn" aria-label="Play">
     <svg id="iconPlay" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
@@ -758,8 +878,8 @@
     </svg>
   </button>
   <div class="song-info">
-    <div class="song-title">My Dark Creation</div>
-    <div class="song-sub">a coronation</div>
+    <div class="song-title">Kiss Before the Grave</div>
+    <div class="song-sub">a confession</div>
   </div>
   <div class="progress-wrap">
     <span class="time" id="timeCurrent">0:00</span>
@@ -780,6 +900,7 @@
 </div>
 
 <script>
+  // Scroll reveal
   const revealEls = document.querySelectorAll('.reveal');
   const revealObs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -791,6 +912,7 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
   revealEls.forEach(el => revealObs.observe(el));
 
+  // Player refs
   const audio = document.getElementById('audio');
   const playBtn = document.getElementById('playBtn');
   const iconPlay = document.getElementById('iconPlay');
@@ -808,6 +930,7 @@
 
   audio.src = 'audio.mp3';
 
+  // Lyric timestamps (from LRC)
   const lyricEls = Array.from(document.querySelectorAll('.lyric[data-t]'))
     .map(el => ({ el, t: parseFloat(el.dataset.t) }))
     .sort((a, b) => a.t - b.t);
@@ -816,12 +939,14 @@
   let userScrolling = false;
   let userScrollTimer = null;
 
+  // Don't auto-scroll while the user is scrolling manually
   window.addEventListener('scroll', () => {
     userScrolling = true;
     clearTimeout(userScrollTimer);
     userScrollTimer = setTimeout(() => { userScrolling = false; }, 1500);
   }, { passive: true });
 
+  // Click a lyric to seek
   lyricEls.forEach(({ el, t }) => {
     el.addEventListener('click', () => {
       if (!audio.duration) return;
@@ -836,10 +961,12 @@
     for (let i = 0; i < lyricEls.length; i++) {
       if (lyricEls[i].t <= time) {
         idx = i;
+        // Mark as revealed (once revealed, stays revealed)
         if (!lyricEls[i].el.classList.contains('revealed')) {
           lyricEls[i].el.classList.add('revealed');
         }
-      } else break;
+      }
+      else break;
     }
     if (idx !== currentIdx) {
       if (currentIdx >= 0) lyricEls[currentIdx].el.classList.remove('active');
@@ -869,10 +996,13 @@
   revealToggle.addEventListener('click', () => {
     revealToggle.classList.toggle('on');
     if (revealToggle.classList.contains('on')) {
+      // ON = show all lyrics immediately
       document.body.classList.remove('reveal-mode');
       lyricEls.forEach(({ el }) => el.classList.add('revealed'));
     } else {
+      // OFF = hide lyrics, reveal only as sung
       document.body.classList.add('reveal-mode');
+      // Clear 'revealed' from any line that hasn't been reached yet
       const time = audio.currentTime || 0;
       lyricEls.forEach(({ el, t }) => {
         if (t > time) el.classList.remove('revealed');
@@ -907,6 +1037,7 @@
 
   audio.addEventListener('play', () => {
     setPlayIcon(true);
+    // Dismiss onboarding cues once playback begins
     const cue = document.getElementById('playCue');
     if (cue) cue.classList.add('dismissed');
     playBtn.classList.remove('pulse');
@@ -916,6 +1047,7 @@
   audio.addEventListener('loadedmetadata', () => {
     timeDuration.textContent = formatTime(audio.duration);
     uploadLabel.style.display = 'none';
+    // Start pulsing the play button so it's clear what to click
     playBtn.classList.add('pulse');
   });
   audio.addEventListener('timeupdate', () => {
