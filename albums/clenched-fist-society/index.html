@@ -44,54 +44,63 @@
       "@type": "MusicRecording",
       "name": "Clench Your Fist",
       "position": 1,
+      "description": "The awakening begins. A silent crowd sees the cage for what it is, and one clenched fist becomes the first sign that obedience is breaking.",
       "byArtist": { "@id": "https://marklahive.com/#artist" }
     },
     {
       "@type": "MusicRecording",
       "name": "Crown of Lies",
       "position": 2,
+      "description": "False rulers sit on thrones of rust and deception. This track tears into the polished lies that keep the powerful protected.",
       "byArtist": { "@id": "https://marklahive.com/#artist" }
     },
     {
       "@type": "MusicRecording",
       "name": "Feed the Machine",
       "position": 3,
+      "description": "A descent into the gears of control, where people are consumed by systems that demand labor, attention, obedience, and silence.",
       "byArtist": { "@id": "https://marklahive.com/#artist" }
     },
     {
       "@type": "MusicRecording",
       "name": "Hollow Authority",
       "position": 4,
+      "description": "The mask of power cracks. Behind the uniform, the title, and the threat is an authority with nothing real left to stand on.",
       "byArtist": { "@id": "https://marklahive.com/#artist" }
     },
     {
       "@type": "MusicRecording",
       "name": "Divide and Conquer",
       "position": 5,
+      "description": "A society is split into pieces while those above profit from the chaos. Fear becomes the weapon, and division becomes the cage.",
       "byArtist": { "@id": "https://marklahive.com/#artist" }
     },
     {
       "@type": "MusicRecording",
       "name": "Digital Chains",
       "position": 6,
+      "description": "The prison glows in your hand. Algorithms, screens, and surveillance become the invisible chains of the modern machine.",
       "byArtist": { "@id": "https://marklahive.com/#artist" }
     },
     {
       "@type": "MusicRecording",
       "name": "Queen of the Broken",
       "position": 7,
+      "description": "A scarred sovereign rises from the ruins. She is the voice of the wounded, the discarded, and everyone who survived what should have destroyed them.",
       "byArtist": { "@id": "https://marklahive.com/#artist" }
     },
     {
       "@type": "MusicRecording",
       "name": "No Gods, No Masters",
       "position": 8,
+      "description": "A declaration of total refusal. No false idols, no tyrants, no masters — only the will to stand free.",
       "byArtist": { "@id": "https://marklahive.com/#artist" }
     },
     {
       "@type": "MusicRecording",
       "name": "Burn the System",
       "position": 9,
+      "description": "The final spark becomes an inferno. The old machine burns, the chains fall, and the future begins in the ashes.",
       "byArtist": { "@id": "https://marklahive.com/#artist" }
     }
   ],
@@ -345,18 +354,27 @@
     margin: 0 auto;
   }
   .track {
+    border-bottom: 1px solid var(--steel);
+    transition: border-color 0.3s ease;
+  }
+  .track:hover {
+    border-bottom-color: var(--blood);
+  }
+  .track-header {
     display: flex;
     align-items: center;
     gap: 1.5rem;
     padding: 1.1rem 0;
-    border-bottom: 1px solid var(--steel);
-    transition: padding 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    transition: padding 0.3s ease;
+    user-select: none;
   }
-  .track:hover {
+  .track:hover .track-header {
     padding-left: 8px;
-    border-bottom-color: var(--blood);
   }
   .track:hover .track-name { color: var(--blood-bright); }
+  .track:hover .track-num { color: var(--blood); }
+  .track:hover .track-chevron { color: var(--blood); }
   .track-num {
     font-family: var(--sans);
     font-size: 12px;
@@ -366,7 +384,6 @@
     min-width: 28px;
     transition: color 0.3s ease;
   }
-  .track:hover .track-num { color: var(--blood); }
   .track-name {
     font-family: var(--display);
     font-size: 1.1rem;
@@ -376,6 +393,40 @@
     text-transform: uppercase;
     transition: color 0.3s ease;
     flex: 1;
+  }
+  .track-chevron {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-whisper);
+    transition: transform 0.4s ease, color 0.3s ease;
+    display: inline-block;
+    line-height: 1;
+  }
+  .track.expanded .track-chevron {
+    transform: rotate(90deg);
+    color: var(--blood);
+  }
+
+  .track-synopsis {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out;
+  }
+  .track.expanded .track-synopsis {
+    max-height: 400px;
+    opacity: 1;
+    padding: 0 0 1.5rem 2.5rem;
+  }
+  .track-synopsis p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--ink-muted);
+    margin: 0;
+    border-left: 2px solid var(--blood-deep);
+    padding-left: 1.25rem;
   }
 
   /* --- STREAMING --- */
@@ -500,42 +551,106 @@
   <div class="container">
     <p class="tag reveal">Tracks</p>
     <div class="tracklist">
+
       <div class="track reveal">
-        <span class="track-num">01</span>
-        <span class="track-name">Clench Your Fist</span>
+        <div class="track-header">
+          <span class="track-num">01</span>
+          <span class="track-name">Clench Your Fist</span>
+          <span class="track-chevron">›</span>
+        </div>
+        <div class="track-synopsis">
+          <p>The awakening begins. A silent crowd sees the cage for what it is, and one clenched fist becomes the first sign that obedience is breaking.</p>
+        </div>
       </div>
+
       <div class="track reveal">
-        <span class="track-num">02</span>
-        <span class="track-name">Crown of Lies</span>
+        <div class="track-header">
+          <span class="track-num">02</span>
+          <span class="track-name">Crown of Lies</span>
+          <span class="track-chevron">›</span>
+        </div>
+        <div class="track-synopsis">
+          <p>False rulers sit on thrones of rust and deception. This track tears into the polished lies that keep the powerful protected.</p>
+        </div>
       </div>
+
       <div class="track reveal">
-        <span class="track-num">03</span>
-        <span class="track-name">Feed the Machine</span>
+        <div class="track-header">
+          <span class="track-num">03</span>
+          <span class="track-name">Feed the Machine</span>
+          <span class="track-chevron">›</span>
+        </div>
+        <div class="track-synopsis">
+          <p>A descent into the gears of control, where people are consumed by systems that demand labor, attention, obedience, and silence.</p>
+        </div>
       </div>
+
       <div class="track reveal">
-        <span class="track-num">04</span>
-        <span class="track-name">Hollow Authority</span>
+        <div class="track-header">
+          <span class="track-num">04</span>
+          <span class="track-name">Hollow Authority</span>
+          <span class="track-chevron">›</span>
+        </div>
+        <div class="track-synopsis">
+          <p>The mask of power cracks. Behind the uniform, the title, and the threat is an authority with nothing real left to stand on.</p>
+        </div>
       </div>
+
       <div class="track reveal">
-        <span class="track-num">05</span>
-        <span class="track-name">Divide and Conquer</span>
+        <div class="track-header">
+          <span class="track-num">05</span>
+          <span class="track-name">Divide and Conquer</span>
+          <span class="track-chevron">›</span>
+        </div>
+        <div class="track-synopsis">
+          <p>A society is split into pieces while those above profit from the chaos. Fear becomes the weapon, and division becomes the cage.</p>
+        </div>
       </div>
+
       <div class="track reveal">
-        <span class="track-num">06</span>
-        <span class="track-name">Digital Chains</span>
+        <div class="track-header">
+          <span class="track-num">06</span>
+          <span class="track-name">Digital Chains</span>
+          <span class="track-chevron">›</span>
+        </div>
+        <div class="track-synopsis">
+          <p>The prison glows in your hand. Algorithms, screens, and surveillance become the invisible chains of the modern machine.</p>
+        </div>
       </div>
+
       <div class="track reveal">
-        <span class="track-num">07</span>
-        <span class="track-name">Queen of the Broken</span>
+        <div class="track-header">
+          <span class="track-num">07</span>
+          <span class="track-name">Queen of the Broken</span>
+          <span class="track-chevron">›</span>
+        </div>
+        <div class="track-synopsis">
+          <p>A scarred sovereign rises from the ruins. She is the voice of the wounded, the discarded, and everyone who survived what should have destroyed them.</p>
+        </div>
       </div>
+
       <div class="track reveal">
-        <span class="track-num">08</span>
-        <span class="track-name">No Gods, No Masters</span>
+        <div class="track-header">
+          <span class="track-num">08</span>
+          <span class="track-name">No Gods, No Masters</span>
+          <span class="track-chevron">›</span>
+        </div>
+        <div class="track-synopsis">
+          <p>A declaration of total refusal. No false idols, no tyrants, no masters — only the will to stand free.</p>
+        </div>
       </div>
+
       <div class="track reveal">
-        <span class="track-num">09</span>
-        <span class="track-name">Burn the System</span>
+        <div class="track-header">
+          <span class="track-num">09</span>
+          <span class="track-name">Burn the System</span>
+          <span class="track-chevron">›</span>
+        </div>
+        <div class="track-synopsis">
+          <p>The final spark becomes an inferno. The old machine burns, the chains fall, and the future begins in the ashes.</p>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -571,6 +686,13 @@
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
   revealEls.forEach(el => observer.observe(el));
+
+  // Expandable track synopses
+  document.querySelectorAll('.track-header').forEach(header => {
+    header.addEventListener('click', () => {
+      header.parentElement.classList.toggle('expanded');
+    });
+  });
 </script>
 
 <!-- Cloudflare Web Analytics -->
