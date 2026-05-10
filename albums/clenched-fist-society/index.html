@@ -1,1 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clenched Fist Society — Mark LaHive</title>
+<meta name="description" content="Clenched Fist Society by Mark LaHive — a heavy metal protest album forged in anger, rebellion, and refusal. We don't bow." />
+
+<!-- Social link previews -->
+<meta property="og:title" content="Clenched Fist Society — Mark LaHive" />
+<meta property="og:description" content="A heavy metal protest album forged in anger, rebellion, and refusal. We don't bow." />
+<meta property="og:type" content="music.album" />
+<meta property="og:image" content="https://marklahive.com/covers/clenched-fist-society.jpg" />
+<meta property="og:url" content="https://marklahive.com/albums/clenched-fist-society/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Clenched Fist Society — Mark LaHive" />
+<meta name="twitter:description" content="A heavy metal protest album. We don't bow." />
+<meta name="twitter:image" content="https://marklahive.com/covers/clenched-fist-society.jpg" />
+<link rel="canonical" href="https://marklahive.com/albums/clenched-fist-society/" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --display: 'Cinzel', serif;
+    --sans: 'Inter', system-ui, sans-serif;
+
+    /* Industrial protest palette — concrete + blood */
+    --bg: #0d0d0e;
+    --bg-deep: #050505;
+    --concrete: #1a1a1c;
+    --concrete-light: #2a2a2c;
+    --steel: #4a4a4c;
+    --ink: #e8e6e4;
+    --ink-muted: #a8a4a0;
+    --ink-dim: #6a6664;
+    --ink-whisper: #4a4644;
+    --blood: #c41e2c;
+    --blood-bright: #e8323e;
+    --blood-deep: #6b0a14;
+    --blood-shadow: #2a0508;
+    --rust: #4a1a14;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* --- backgrounds --- */
+  .bg-hero {
+    background: radial-gradient(ellipse at 50% 60%, var(--rust) 0%, var(--bg-deep) 60%, #000 100%);
+  }
+  .bg-section {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--concrete) 100%);
+  }
+  .bg-section-alt {
+    background: var(--concrete);
+  }
+  .bg-tracks {
+    background:
+      linear-gradient(180deg, var(--concrete) 0%, var(--bg) 100%),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 40px,
+        rgba(196, 30, 44, 0.02) 40px,
+        rgba(196, 30, 44, 0.02) 41px
+      );
+  }
+  .bg-footer {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+  }
+
+  /* --- animations (sparing, less ambient than gothic pages) --- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes coverGlow {
+    0%, 100% { box-shadow: 0 0 30px rgba(196, 30, 44, 0.25), 0 0 0 1px rgba(107, 10, 20, 0.7); }
+    50% { box-shadow: 0 0 50px rgba(196, 30, 44, 0.4), 0 0 0 1px rgba(196, 30, 44, 0.6); }
+  }
+  @keyframes flagDraw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .fadeup { animation: fadeUp 1.4s ease-out both; }
+  .fadeup-1 { animation: fadeUp 1.4s ease-out 0.15s both; }
+  .fadeup-2 { animation: fadeUp 1.4s ease-out 0.3s both; }
+  .fadeup-3 { animation: fadeUp 1.4s ease-out 0.45s both; }
+  .fadeup-4 { animation: fadeUp 1.4s ease-out 0.6s both; }
+
+  /* --- reveal on scroll --- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.4s ease-out, transform 1.4s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  section { padding: 5rem 2rem; position: relative; }
+  .container { max-width: 720px; margin: 0 auto; }
+
+  /* --- HERO --- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-cover {
+    width: 320px;
+    max-width: 80vw;
+    height: auto;
+    aspect-ratio: 1;
+    margin: 0 auto 2.5rem;
+    display: block;
+    object-fit: cover;
+    border-radius: 2px;
+    animation: coverGlow 6s ease-in-out infinite;
+    transition: transform 0.6s ease;
+  }
+  .hero-cover:hover { transform: scale(1.02); }
+
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.6em;
+    color: var(--blood);
+    text-transform: uppercase;
+    margin: 0 0 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(2.6rem, 8vw, 5rem);
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(196, 30, 44, 0.25);
+  }
+  .hero .manifesto-line {
+    margin: 1.75rem 0 0;
+    font-family: var(--display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.5em;
+    color: var(--blood);
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+  }
+  .hero .manifesto-line::before,
+  .hero .manifesto-line::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 1px;
+    background: var(--blood-deep);
+  }
+  .hero .manifesto-line::before { right: 100%; }
+  .hero .manifesto-line::after { left: 100%; }
+
+  .hero .scroll-cue {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    color: var(--ink-whisper);
+    text-transform: uppercase;
+    margin-top: 4rem;
+  }
+
+  /* --- DESCRIPTION --- */
+  .description {
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+  .description p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--ink-muted);
+    margin: 0 0 1.5rem;
+  }
+  .description p:last-child {
+    color: var(--ink);
+    font-size: 1.3rem;
+    font-style: normal;
+    font-family: var(--display);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+  }
+  .description .ornament {
+    width: 60px;
+    height: 1px;
+    background: var(--blood-deep);
+    margin: 2.5rem auto;
+    border: 0;
+  }
+
+  /* --- SECTION TAGS --- */
+  .tag {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    color: var(--blood);
+    text-transform: uppercase;
+    margin: 0 0 2rem;
+    text-align: center;
+  }
+
+  /* --- SPOTIFY EMBED --- */
+  .embed-wrap {
+    margin: 0 auto;
+    max-width: 680px;
+  }
+  .embed-wrap iframe {
+    border-radius: 12px;
+    display: block;
+  }
+
+  /* --- TRACKLIST --- */
+  .tracklist {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .track {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--steel);
+    transition: padding 0.3s ease, border-color 0.3s ease;
+  }
+  .track:hover {
+    padding-left: 8px;
+    border-bottom-color: var(--blood);
+  }
+  .track:hover .track-name { color: var(--blood-bright); }
+  .track-num {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--ink-whisper);
+    min-width: 28px;
+    transition: color 0.3s ease;
+  }
+  .track:hover .track-num { color: var(--blood); }
+  .track-name {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    flex: 1;
+  }
+
+  /* --- STREAMING --- */
+  .streaming {
+    text-align: center;
+  }
+  .streaming-row {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    color: var(--blood);
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .streaming-row a {
+    color: var(--blood);
+    text-decoration: none;
+    padding: 0 14px;
+    transition: color 0.3s ease;
+  }
+  .streaming-row a:hover { color: var(--blood-bright); }
+  .streaming-row .sep { color: var(--steel); }
+  .streaming-coming {
+    margin-top: 1.5rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+
+  /* --- BACK LINK --- */
+  .back-link {
+    text-align: center;
+    margin-top: 3rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-dim);
+  }
+  .back-link a {
+    color: var(--ink-muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  .back-link a:hover {
+    color: var(--blood);
+    border-bottom-color: var(--blood-deep);
+  }
+  .back-link .arrow {
+    display: inline-block;
+    margin-right: 6px;
+    transition: transform 0.3s ease;
+  }
+  .back-link a:hover .arrow { transform: translateX(-3px); }
+
+  /* --- FOOTER LOCATION --- */
+  .footer-location {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--ink-whisper);
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 4rem;
+  }
+
+  /* --- mobile --- */
+  @media (max-width: 700px) {
+    section { padding: 3.5rem 1.5rem; }
+    .hero-cover { width: 240px; }
+    .hero h1 { font-size: clamp(2.2rem, 11vw, 3.5rem); }
+    .hero .manifesto-line { font-size: 0.95rem; letter-spacing: 0.4em; padding: 0.4rem 1rem; }
+    .hero .manifesto-line::before,
+    .hero .manifesto-line::after { width: 25px; }
+    .description p { font-size: 1.05rem; }
+    .description p:last-child { font-size: 1.15rem; }
+    .track { gap: 1rem; padding: 1rem 0; }
+    .track-num { font-size: 11px; min-width: 24px; }
+    .track-name { font-size: 0.95rem; letter-spacing: 0.05em; }
+    .streaming-row { font-size: 10px; letter-spacing: 0.2em; }
+    .streaming-row a { padding: 0 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero bg-hero">
+  <p class="hero-eyebrow fadeup">Album · 2026</p>
+  <img src="/covers/clenched-fist-society.jpg" alt="Clenched Fist Society album cover" class="hero-cover fadeup-1" />
+  <h1 class="fadeup-2">Clenched Fist Society</h1>
+  <p class="manifesto-line fadeup-3">We Don't Bow</p>
+  <p class="scroll-cue fadeup-4">scroll ↓</p>
+</section>
+
+<!-- DESCRIPTION -->
+<section class="bg-section">
+  <div class="container">
+    <div class="description">
+      <p class="reveal">Clenched Fist Society is a heavy metal protest album forged in anger, rebellion, and refusal. Built on crushing riffs, anthemic chants, and anti-establishment themes, the record explores corruption, media control, digital chains, division, and the fight to reclaim individual power.</p>
+      <hr class="ornament reveal" />
+      <p class="reveal">This is music for the ones who see the machine for what it is — and refuse to be owned by it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPOTIFY EMBED -->
+<section class="bg-section-alt">
+  <div class="container">
+    <p class="tag reveal">Listen</p>
+    <div class="embed-wrap reveal">
+      <iframe style="border-radius: 12px;" src="https://open.spotify.com/embed/album/060wBIA4YFWZCI8vYJoSM3?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- TRACKLIST -->
+<section class="bg-tracks">
+  <div class="container">
+    <p class="tag reveal">Tracks</p>
+    <div class="tracklist">
+      <div class="track reveal">
+        <span class="track-num">01</span>
+        <span class="track-name">Clench Your Fist</span>
+      </div>
+      <div class="track reveal">
+        <span class="track-num">02</span>
+        <span class="track-name">Crown of Lies</span>
+      </div>
+      <div class="track reveal">
+        <span class="track-num">03</span>
+        <span class="track-name">Feed the Machine</span>
+      </div>
+      <div class="track reveal">
+        <span class="track-num">04</span>
+        <span class="track-name">Divide and Conquer</span>
+      </div>
+      <div class="track reveal">
+        <span class="track-num">05</span>
+        <span class="track-name">Digital Chains</span>
+      </div>
+      <div class="track reveal">
+        <span class="track-num">06</span>
+        <span class="track-name">No Gods, No Masters</span>
+      </div>
+      <div class="track reveal">
+        <span class="track-num">07</span>
+        <span class="track-name">Burn the System</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STREAMING + BACK LINK -->
+<section class="bg-footer">
+  <div class="container">
+    <p class="tag reveal">Stream the album</p>
+    <div class="streaming reveal">
+      <p class="streaming-row">
+        <a href="https://open.spotify.com/album/060wBIA4YFWZCI8vYJoSM3" target="_blank" rel="noopener">Spotify</a>
+      </p>
+      <p class="streaming-coming">Apple Music, YouTube, and SoundCloud — coming soon</p>
+    </div>
+    <p class="back-link reveal">
+      <a href="/"><span class="arrow">←</span>back to the catalog</a>
+    </p>
+    <p class="footer-location">orlando, florida</p>
+  </div>
+</section>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8c3d7109e7484e9da8c1b1b194a97c9d"}'></script>
+<!-- End Cloudflare Web Analytics -->
+
+</body>
+</html>
 
